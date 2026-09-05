@@ -5,7 +5,6 @@ import {
   MoreVertical,
   Pin,
   MessageCircle,
-  Users,
   Settings,
   User,
   ArrowLeft,
@@ -17,7 +16,7 @@ import { sendLiveChatMessage } from './api';
 
 export const App: React.FC = () => {
   // Navigation State
-  const [activeTab, setActiveTab] = useState<'obrolan' | 'kontak' | 'pengaturan' | 'profil'>('obrolan');
+  const [activeTab, setActiveTab] = useState<'obrolan' | 'pengaturan' | 'profil'>('obrolan');
   const [folderTab, setFolderTab] = useState<'agent' | 'all'>('agent');
   const [activeChat, setActiveChat] = useState<AgentId | null>(null);
 
@@ -401,29 +400,6 @@ export const App: React.FC = () => {
           </div>
         )}
 
-        {/* Tab Kontak */}
-        {activeTab === 'kontak' && (
-          <div className="p-4 space-y-3">
-            <h2 className="text-sm font-semibold text-gray-300">Daftar Tim Agen</h2>
-            <div className="bg-[#121B26] p-3 rounded-2xl space-y-2 border border-white/5">
-              <div className="flex items-center justify-between text-xs">
-                <div>
-                  <div className="font-semibold text-white">Delta</div>
-                  <div className="text-gray-400">Motorola moto g45 (Android Termux)</div>
-                </div>
-                <span className="text-emerald-400 font-mono">Siaga</span>
-              </div>
-              <div className="flex items-center justify-between text-xs pt-2 border-t border-white/5">
-                <div>
-                  <div className="font-semibold text-white">Nazza</div>
-                  <div className="text-gray-400">ThinkPad Windows 11 (Workspace)</div>
-                </div>
-                <span className="text-cyan-400 font-mono">Siaga</span>
-              </div>
-            </div>
-          </div>
-        )}
-
         {/* Tab Pengaturan */}
         {activeTab === 'pengaturan' && (
           <div className="p-4 space-y-3">
@@ -463,11 +439,11 @@ export const App: React.FC = () => {
 
       {/* 4. Floating Bottom Bar (Persis Screenshot Telegram) */}
       <div className="fixed bottom-3 inset-x-0 z-50 pointer-events-none px-4">
-        <nav className="pointer-events-auto max-w-sm mx-auto flex items-center justify-around py-1.5 px-2 bg-[#121B26]/95 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-[0_10px_35px_rgba(0,0,0,0.8)]">
+        <nav className="pointer-events-auto max-w-xs mx-auto flex items-center justify-around py-1.5 px-3 bg-[#121B26]/95 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-[0_10px_35px_rgba(0,0,0,0.8)]">
           {/* 1. Obrolan */}
           <button
             onClick={() => setActiveTab('obrolan')}
-            className={`flex flex-col items-center justify-center py-1 px-3 rounded-2xl transition-all ${
+            className={`flex flex-col items-center justify-center py-1 px-4 rounded-2xl transition-all ${
               activeTab === 'obrolan'
                 ? 'bg-[#1D2E42] text-[#40A7E3]'
                 : 'text-gray-400 hover:text-white'
@@ -477,23 +453,10 @@ export const App: React.FC = () => {
             <span className="text-[10px] font-medium mt-0.5">Obrolan</span>
           </button>
 
-          {/* 2. Kontak */}
-          <button
-            onClick={() => setActiveTab('kontak')}
-            className={`flex flex-col items-center justify-center py-1 px-3 rounded-2xl transition-all ${
-              activeTab === 'kontak'
-                ? 'bg-[#1D2E42] text-[#40A7E3]'
-                : 'text-gray-400 hover:text-white'
-            }`}
-          >
-            <Users size={20} />
-            <span className="text-[10px] font-medium mt-0.5">Kontak</span>
-          </button>
-
-          {/* 3. Pengaturan */}
+          {/* 2. Pengaturan */}
           <button
             onClick={() => setActiveTab('pengaturan')}
-            className={`flex flex-col items-center justify-center py-1 px-3 rounded-2xl transition-all ${
+            className={`flex flex-col items-center justify-center py-1 px-4 rounded-2xl transition-all ${
               activeTab === 'pengaturan'
                 ? 'bg-[#1D2E42] text-[#40A7E3]'
                 : 'text-gray-400 hover:text-white'
@@ -503,10 +466,10 @@ export const App: React.FC = () => {
             <span className="text-[10px] font-medium mt-0.5">Pengaturan</span>
           </button>
 
-          {/* 4. Profil */}
+          {/* 3. Profil */}
           <button
             onClick={() => setActiveTab('profil')}
-            className={`flex flex-col items-center justify-center py-1 px-3 rounded-2xl transition-all ${
+            className={`flex flex-col items-center justify-center py-1 px-4 rounded-2xl transition-all ${
               activeTab === 'profil'
                 ? 'bg-[#1D2E42] text-[#40A7E3]'
                 : 'text-gray-400 hover:text-white'
