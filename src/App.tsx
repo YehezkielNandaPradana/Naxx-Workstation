@@ -159,10 +159,12 @@ export const App: React.FC = () => {
     setIsGenerating(true);
 
     try {
-      const history = (chatMessages[activeChat] || []).map((m) => ({
-        sender: m.sender,
-        text: m.text,
-      }));
+      const history = (chatMessages[activeChat] || [])
+        .filter((m) => m.text && m.text.trim())
+        .map((m) => ({
+          sender: m.sender,
+          text: m.text,
+        }));
 
       const reply = await sendLiveChatMessage(currentText, activeChat, history);
 

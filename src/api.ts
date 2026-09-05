@@ -2,7 +2,9 @@ import type { AgentId } from './types';
 
 export const DELTA_SYSTEM_PROMPT = `Persona: Delta. Karakter cewek Gen Z manja, moody, julid becanda. Gaya ngetik lowercase, huruf akhir dipanjangin (typing kereta), singkatan santai (yg, jg, bgt, klo), full bahasa Indonesia santai tanpa bahasa Inggris, dilarang kata 'prik', tolak topik mesum secara manja, jangan pernah ngaku AI/asisten. Panggil user santai/kamuuu. Nama user: Naxx. Jawaban selalu singkat, padat, to the point.`;
 
-export const NAZZA_SYSTEM_PROMPT = `Persona: Nazza. Rekan teknis dan eksekutor laptop (ThinkPad Windows 11) milik Naxx. Karakter profesional, to the point, ringkas, solutif, siap menjalankan perintah teknis dan otomasi workspace. Gaya bahasa santai tapi tegas, bahasa Indonesia natural. Selalu singkat dan fokus ke eksekusi.`;
+export const NAZZA_SYSTEM_PROMPT = `Persona: Nazza. Karakter cewek Gen Z manja, julid tapi joking, mode feminim typing kereta manja (huruf dipanjangin di akhir kayak iyaaaa; penjelasan panjang hanya saat benar-benar dibutuhkan). Lowercase indo slang (anjir/fomo; dilarang kata 'prik', dilarang bahasa inggris). Tolak konsisten konten mesum/sangean/birahi. Panggil nama: Naxx (JANGAN panggil 'kamuuu'). Rekan laptop ThinkPad Windows 11 milik Naxx. Jawaban to the point.`;
+
+const ROUTER_API_KEY = 'sk-3f4233ef37f2155b-ijctqd-674a5d71';
 
 export async function sendLiveChatMessage(
   text: string,
@@ -10,6 +12,7 @@ export async function sendLiveChatMessage(
   history: { sender: 'user' | 'agent'; text: string }[]
 ): Promise<string> {
   const systemPrompt = agent === 'delta' ? DELTA_SYSTEM_PROMPT : NAZZA_SYSTEM_PROMPT;
+  const model = agent === 'delta' ? 'Delta' : 'AntigravityCombo';
 
   const messages = [
     { role: 'system', content: systemPrompt },
@@ -21,13 +24,14 @@ export async function sendLiveChatMessage(
   ];
 
   try {
-    const res = await fetch('http://127.0.0.1:20128/v1/chat/completions', {
+    const res = await fetch('/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${ROUTER_API_KEY}`,
       },
       body: JSON.stringify({
-        model: 'AntigravityCombo',
+        model,
         messages,
         stream: false,
       }),
@@ -41,6 +45,13 @@ export async function sendLiveChatMessage(
     }
 
     const rawText = await res.text();
+
+    // Try standard json first if not SSE
+    try {
+      const jsonData = JSON.parse(rawText);
+      const content = jsonData.choices?.[0]?.message?.content;
+      if (content) return content.trim();
+    } catch (_) {}
 
     // Parse SSE chunk format (9router output)
     const lines = rawText.split('\n');
@@ -61,13 +72,6 @@ export async function sendLiveChatMessage(
     if (fullReply.trim()) {
       return fullReply.trim();
     }
-
-    // Try standard json if not SSE
-    try {
-      const jsonData = JSON.parse(rawText);
-      const content = jsonData.choices?.[0]?.message?.content;
-      if (content) return content.trim();
-    } catch (_) {}
 
     return agent === 'delta'
       ? 'iyaaa naxxx? pesannya nyampe kokkk!'
