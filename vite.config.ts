@@ -4,6 +4,7 @@ import { defineConfig } from 'vite'
 // https://vite.dev/config/
 // Proxy ke 9Router lokal
 export default defineConfig({
+  base: '/Naxx-Workstation/',
   plugins: [react()],
   server: {
     proxy: {
