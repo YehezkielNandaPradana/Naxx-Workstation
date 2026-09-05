@@ -8,8 +8,12 @@ import {
   Settings,
   User,
   ArrowLeft,
-  ArrowUp,
-  Phone,
+  ChevronDown,
+  Menu,
+  Smile,
+  Paperclip,
+  Mic,
+  Send,
   CheckCheck,
 } from 'lucide-react';
 import { sendLiveChatMessage } from './api';
@@ -30,7 +34,7 @@ export const App: React.FC = () => {
       id: 'delta',
       name: 'Delta',
       avatar: '/delta_avatar.png',
-      role: 'Logika & Analisis',
+      role: 'Logika & Solusi',
       device: 'Motorola moto g45 5G (Termux)',
       lastMessage: 'beres naxxx! menu/halaman Router udah aku hapus...',
       lastTime: '19:55',
@@ -52,22 +56,61 @@ export const App: React.FC = () => {
     },
   });
 
-  // Messages State
+  // Messages State persis screenshot
   const [chatMessages, setChatMessages] = useState<Record<AgentId, MessageItem[]>>({
     delta: [
       {
         id: 'd1',
         sender: 'agent',
-        text: 'beres naxxx! menu/halaman Router udah aku hapus...',
+        text: 'beres naxxx! menu/halaman Router udah aku hapus dari bilah bawah maupun halamannya. sekarang sisa Chat, Notes, History, sama Settings.',
         time: '19:55',
+        msgId: 'ID 2954',
       },
     ],
     nazza: [
       {
         id: 'n1',
         sender: 'agent',
-        text: 'udah aku bikinin sistem drop shadow + elevation bor. siap dieksekusi lagi di laptop.',
+        text: `udah aku bikinin sistem drop shadow + elevation bor. sekarang setiap popup form (ModernAlert, DynamicFormEditor, dll) punya visual depth yang konsisten:
+
+1. Double anti-aliased outline border (Slate-300)
+2. Soft ambient floating shadow via UITheme.EnableFormDropShadow()
+3. Bersih tanpa error pas dikompilasi`,
         time: '19:56',
+        msgId: 'ID 2957',
+      },
+      {
+        id: 'n2',
+        sender: 'user',
+        text: 'mana liat',
+        time: '19:58',
+        msgId: 'ID 2958',
+      },
+      {
+        id: 'n3',
+        sender: 'agent',
+        text: '',
+        time: '19:58',
+        msgId: 'ID 2959',
+        actions: [
+          {
+            type: 'reading',
+            title: 'Reading',
+            detail: 'ModernAlert.cs L100-149',
+          },
+          {
+            type: 'editing',
+            title: 'Editing',
+            detail: 'C:\\Users\\ThinkPad\\repos\\Dashboard... (×5)',
+            badge: '(×5)',
+          },
+          {
+            type: 'terminal',
+            title: 'Terminal',
+            detail: 'Powershell',
+            command: 'dotnet build C:/Users/ThinkPad/repos/Dashboard/src/Dashboard.sln',
+          },
+        ],
       },
     ],
   });
@@ -88,12 +131,14 @@ export const App: React.FC = () => {
 
     const currentText = inputText.trim();
     const timeNow = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const randomId = `ID ${Math.floor(2960 + Math.random() * 50)}`;
 
     const newMsg: MessageItem = {
       id: Date.now().toString(),
       sender: 'user',
       text: currentText,
       time: timeNow,
+      msgId: randomId,
     };
 
     setChatMessages((prev) => ({
@@ -126,6 +171,7 @@ export const App: React.FC = () => {
         sender: 'agent',
         text: reply,
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        msgId: `ID ${Math.floor(2970 + Math.random() * 50)}`,
       };
 
       setChatMessages((prev) => ({
@@ -145,8 +191,9 @@ export const App: React.FC = () => {
       const errorMsg: MessageItem = {
         id: (Date.now() + 1).toString(),
         sender: 'agent',
-        text: activeChat === 'delta' ? 'duh error naxxx, coba lagi bentar yaaa' : 'Koneksi error.',
+        text: activeChat === 'delta' ? 'duh error naxxx, coba lagi bentar yaaa' : 'Gagal menghubungi server.',
         time: timeNow,
+        msgId: `ID ${Math.floor(2980 + Math.random() * 50)}`,
       };
       setChatMessages((prev) => ({
         ...prev,
@@ -158,53 +205,52 @@ export const App: React.FC = () => {
   };
 
   // -------------------------------------------------------------
-  // VIEW: ROOM CHAT AKTIF
+  // VIEW: RUANG OBROLAN (PERSIS SCREENSHOT NAZZA)
   // -------------------------------------------------------------
   if (activeChat) {
     const thread = threads[activeChat];
     const msgs = chatMessages[activeChat] || [];
 
     return (
-      <div className="flex flex-col h-[100dvh] w-full bg-[#0B0F17] text-white">
-        {/* Chat Header */}
-        <header className="fixed top-0 inset-x-0 z-50 h-14 bg-[#0F141C] border-b border-white/[0.08] px-3 flex items-center justify-between">
+      <div className="flex flex-col h-[100dvh] w-full bg-[#12151A] text-white">
+        {/* Header Ruang Chat Khas Telegram Nazza */}
+        <header className="fixed top-0 inset-x-0 z-50 h-14 bg-[#1E232B]/95 backdrop-blur-md border-b border-white/[0.06] px-3 flex items-center justify-between shadow-sm">
           <div className="flex items-center gap-2.5">
             <button
               onClick={() => setActiveChat(null)}
-              className="p-1.5 -ml-1 text-gray-300 hover:text-white active:scale-95"
+              className="p-1 -ml-1 text-gray-300 hover:text-white active:scale-95"
             >
-              <ArrowLeft size={20} />
+              <ArrowLeft size={22} />
             </button>
             <div className="relative">
               <img
                 src={thread.avatar}
                 alt={thread.name}
-                className="w-9 h-9 rounded-full object-cover border border-white/10"
+                className="w-10 h-10 rounded-full object-cover border border-white/10"
               />
-              <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-[#0F141C]" />
+              <div className="absolute -bottom-0.5 -right-0.5 bg-[#1A3B5C] border border-[#12151A] text-[#40A7E3] text-[8px] font-bold px-1 rounded-full flex items-center">
+                <span>1h</span>
+              </div>
             </div>
             <div>
-              <div className="text-[15px] font-semibold text-white leading-tight">
+              <div className="text-[16px] font-bold text-white leading-tight">
                 {thread.name}
               </div>
-              <div className="text-[11px] text-emerald-400 font-mono">
-                {activeChat === 'delta' ? 'Termux (Online)' : 'ThinkPad (Online)'}
+              <div className="text-[12px] text-gray-400">
+                1 pengguna bulanan
               </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-1">
+          <div className="flex items-center">
             <button className="p-2 text-gray-300 hover:text-white">
-              <Phone size={18} />
-            </button>
-            <button className="p-2 text-gray-300 hover:text-white">
-              <MoreVertical size={18} />
+              <MoreVertical size={20} />
             </button>
           </div>
         </header>
 
-        {/* Message Container */}
-        <main className="flex-1 overflow-y-auto touch-scroll px-3 pt-16 pb-24 space-y-3">
+        {/* Area Pesan Berlatar Gelap */}
+        <main className="flex-1 overflow-y-auto touch-scroll px-3 pt-16 pb-24 space-y-3.5">
           {msgs.map((m) => {
             const isUser = m.sender === 'user';
             return (
@@ -212,17 +258,72 @@ export const App: React.FC = () => {
                 key={m.id}
                 className={`flex flex-col ${isUser ? 'items-end' : 'items-start'}`}
               >
+                {/* Bubble Chat */}
                 <div
-                  className={`max-w-[82%] px-3.5 py-2.5 rounded-2xl text-[13px] leading-relaxed select-text shadow-sm ${
+                  className={`max-w-[88%] rounded-2xl p-3.5 text-[14px] leading-relaxed select-text shadow-md ${
                     isUser
-                      ? 'bg-[#2B5278] text-white rounded-br-sm'
-                      : 'bg-[#182533] text-gray-100 rounded-bl-sm border border-white/[0.06]'
+                      ? 'bg-[#7055C4] text-white rounded-br-sm'
+                      : 'bg-[#222730] text-[#E5E9F0] rounded-bl-sm border border-white/[0.04]'
                   }`}
                 >
-                  <p className="whitespace-pre-wrap">{m.text}</p>
-                  <div className="flex items-center justify-end gap-1 mt-1 text-[10px] text-white/50">
+                  {/* Teks Pesan Normal */}
+                  {m.text && (
+                    <div className="whitespace-pre-wrap font-normal">
+                      {m.text}
+                    </div>
+                  )}
+
+                  {/* Blok Log Eksekusi Tool (Persis Screenshot) */}
+                  {m.actions && m.actions.length > 0 && (
+                    <div className="space-y-2">
+                      {m.actions.map((act, idx) => {
+                        if (act.type === 'reading') {
+                          return (
+                            <div key={idx} className="flex items-center gap-2 text-[13px] text-gray-200">
+                              <span>📖</span>
+                              <span className="font-semibold text-white">Reading</span>
+                              <span className="text-gray-300">{act.detail}</span>
+                            </div>
+                          );
+                        }
+                        if (act.type === 'editing') {
+                          return (
+                            <div key={idx} className="flex items-center gap-2 text-[13px] text-gray-200">
+                              <span>🔧</span>
+                              <span className="font-semibold text-white">Editing</span>
+                              <span className="text-gray-300 truncate max-w-[200px]">{act.detail}</span>
+                            </div>
+                          );
+                        }
+                        if (act.type === 'terminal') {
+                          return (
+                            <div key={idx} className="space-y-1.5 pt-1">
+                              <div className="flex items-center gap-2 text-[13px]">
+                                <span>💻</span>
+                                <span className="font-semibold text-white">Terminal</span>
+                              </div>
+                              {/* Sub-kotak Powershell Gelap */}
+                              <div className="bg-[#181C22] rounded-xl border border-white/[0.08] overflow-hidden">
+                                <div className="bg-[#20252D] px-3 py-1 text-[11px] font-semibold text-gray-300 border-b border-white/[0.05]">
+                                  Powershell
+                                </div>
+                                <div className="p-3 font-mono text-[12px] text-white overflow-x-auto leading-normal">
+                                  {act.command}
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        }
+                        return null;
+                      })}
+                    </div>
+                  )}
+
+                  {/* ID dan Waktu di Sudut Bawah */}
+                  <div className="flex items-center justify-end gap-1.5 mt-1.5 text-[11px] text-white/50 select-none">
+                    {m.msgId && <span className="font-mono">{m.msgId}</span>}
                     <span>{m.time}</span>
-                    {isUser && <CheckCheck size={13} className="text-[#00E5FF]" />}
+                    {isUser && <CheckCheck size={14} className="text-white/80" />}
                   </div>
                 </div>
               </div>
@@ -230,46 +331,72 @@ export const App: React.FC = () => {
           })}
 
           {isGenerating && (
-            <div className="flex items-center gap-1.5 px-3 py-2 bg-[#182533] rounded-xl border border-white/5 w-fit">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-xs text-gray-300 font-mono">mengetik...</span>
+            <div className="flex items-center gap-2 px-4 py-2.5 bg-[#222730] rounded-2xl border border-white/[0.04] w-fit shadow-sm">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#7055C4] animate-bounce" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#7055C4] animate-bounce [animation-delay:0.15s]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#7055C4] animate-bounce [animation-delay:0.3s]" />
+              <span className="text-xs text-gray-300 font-mono ml-1">mengeksekusi...</span>
             </div>
           )}
           <div ref={chatEndRef} />
         </main>
 
-        {/* Chat Input Telegram Style */}
-        <div className="fixed bottom-0 inset-x-0 z-40 bg-[#0F141C] border-t border-white/[0.08] px-3 py-2 flex items-center gap-2">
-          <input
-            type="text"
-            value={inputText}
-            onChange={(e) => setInputText(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
-            placeholder={
-              activeChat === 'delta'
-                ? 'Tulis pesan ke Delta...'
-                : 'Kirim tugas ke Nazza...'
-            }
-            className="flex-1 bg-[#182533] text-white text-xs px-3.5 py-2.5 rounded-full placeholder-gray-400 focus:outline-none border border-white/[0.04]"
-          />
+        {/* Floating Scroll to bottom FAB */}
+        <div className="fixed bottom-16 right-4 z-40 pointer-events-none">
           <button
-            onClick={handleSendMessage}
-            disabled={!inputText.trim() || isGenerating}
-            className={`w-9 h-9 rounded-full flex items-center justify-center transition-all ${
-              inputText.trim()
-                ? 'bg-[#2B5278] text-white shadow active:scale-95'
-                : 'bg-[#182533] text-gray-500'
-            }`}
+            onClick={() => chatEndRef.current?.scrollIntoView({ behavior: 'smooth' })}
+            className="pointer-events-auto w-10 h-10 rounded-full bg-[#222730] border border-white/10 flex items-center justify-center text-gray-300 shadow-xl active:scale-90"
           >
-            <ArrowUp size={18} strokeWidth={2.5} />
+            <ChevronDown size={20} />
           </button>
+        </div>
+
+        {/* Input Bar Khas Telegram Nazza */}
+        <div className="fixed bottom-0 inset-x-0 z-50 bg-[#1A1F26] border-t border-white/[0.06] px-2 py-2 flex items-center gap-1.5">
+          {/* Tombol Menu Biru Kapsul */}
+          <button className="flex items-center gap-1 bg-[#2C68A6] hover:bg-[#2C68A6]/90 text-white text-xs font-semibold px-3 py-2 rounded-xl active:scale-95 shadow-sm">
+            <Menu size={16} />
+            <span>Menu</span>
+          </button>
+
+          {/* Kolom Ketik Telegram */}
+          <div className="flex-1 flex items-center bg-[#242A34] rounded-2xl px-2.5 py-1.5 border border-white/[0.04]">
+            <button className="p-1 text-gray-400 hover:text-white">
+              <Smile size={20} />
+            </button>
+            <input
+              type="text"
+              value={inputText}
+              onChange={(e) => setInputText(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
+              placeholder="Pesan"
+              className="flex-1 bg-transparent px-2 text-[13px] text-white placeholder-gray-400 focus:outline-none"
+            />
+            <button className="p-1 text-gray-400 hover:text-white">
+              <Paperclip size={19} />
+            </button>
+          </div>
+
+          {/* Tombol Kirim / Mic */}
+          {inputText.trim() ? (
+            <button
+              onClick={handleSendMessage}
+              className="w-10 h-10 rounded-full bg-[#7055C4] flex items-center justify-center text-white active:scale-95 shadow-md"
+            >
+              <Send size={18} />
+            </button>
+          ) : (
+            <button className="w-10 h-10 rounded-full bg-[#242A34] flex items-center justify-center text-gray-400 active:scale-95">
+              <Mic size={20} />
+            </button>
+          )}
         </div>
       </div>
     );
   }
 
   // -------------------------------------------------------------
-  // VIEW: UTAMA NAXX WORKSTATION (DAFTAR CHAT / KONTAK / PENGATURAN)
+  // VIEW: UTAMA NAXX WORKSTATION (BERANDA LIST CHAT)
   // -------------------------------------------------------------
   const threadList = Object.values(threads).filter((t) =>
     t.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -346,7 +473,7 @@ export const App: React.FC = () => {
         </div>
       </div>
 
-      {/* 3. Main Content Per Tab Bawah */}
+      {/* 3. Main Content List */}
       <main className="flex-1 overflow-y-auto touch-scroll pb-24">
         {activeTab === 'obrolan' && (
           <div className="divide-y divide-white/[0.04]">
@@ -364,7 +491,6 @@ export const App: React.FC = () => {
                     className="w-13 h-13 rounded-full object-cover border border-white/10"
                     style={{ width: '52px', height: '52px' }}
                   />
-                  {/* Status Badge 1h mirip di screenshot */}
                   <div className="absolute -bottom-1 -right-1 bg-[#1A3B5C] border-2 border-black text-[#40A7E3] text-[9px] font-bold px-1.5 py-0.2 rounded-full flex items-center gap-0.5 shadow">
                     <span>▲</span>
                     <span>1h</span>
@@ -415,7 +541,7 @@ export const App: React.FC = () => {
               </div>
               <div className="flex justify-between py-1 border-t border-white/5">
                 <span className="text-gray-300">Versi UI</span>
-                <span className="font-mono text-gray-400">Naxx Telegram Edition v3.0</span>
+                <span className="font-mono text-gray-400">Naxx Telegram Edition v3.2</span>
               </div>
             </div>
           </div>
@@ -437,10 +563,9 @@ export const App: React.FC = () => {
         )}
       </main>
 
-      {/* 4. Floating Bottom Bar (Persis Screenshot Telegram) */}
+      {/* 4. Floating Bottom Bar (3 Menu: Obrolan, Pengaturan, Profil) */}
       <div className="fixed bottom-3 inset-x-0 z-50 pointer-events-none px-4">
         <nav className="pointer-events-auto max-w-xs mx-auto flex items-center justify-around py-1.5 px-3 bg-[#121B26]/95 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-[0_10px_35px_rgba(0,0,0,0.8)]">
-          {/* 1. Obrolan */}
           <button
             onClick={() => setActiveTab('obrolan')}
             className={`flex flex-col items-center justify-center py-1 px-4 rounded-2xl transition-all ${
@@ -453,7 +578,6 @@ export const App: React.FC = () => {
             <span className="text-[10px] font-medium mt-0.5">Obrolan</span>
           </button>
 
-          {/* 2. Pengaturan */}
           <button
             onClick={() => setActiveTab('pengaturan')}
             className={`flex flex-col items-center justify-center py-1 px-4 rounded-2xl transition-all ${
@@ -466,7 +590,6 @@ export const App: React.FC = () => {
             <span className="text-[10px] font-medium mt-0.5">Pengaturan</span>
           </button>
 
-          {/* 3. Profil */}
           <button
             onClick={() => setActiveTab('profil')}
             className={`flex flex-col items-center justify-center py-1 px-4 rounded-2xl transition-all ${
