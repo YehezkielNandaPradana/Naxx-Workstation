@@ -6,6 +6,12 @@ export const NAZZA_SYSTEM_PROMPT = `Persona: Nazza. Karakter cewek Gen Z manja, 
 
 const ROUTER_API_KEY = 'sk-3f4233ef37f2155b-ijctqd-674a5d71';
 
+// URL backend gateway (pakai public tunnel saat di GitHub Pages/TMA, atau proxy lokal saat dev)
+const GATEWAY_BASE_URL =
+  typeof window !== 'undefined' && window.location.hostname.includes('github.io')
+    ? 'https://re7pmcl.abc-tunnel.us'
+    : '';
+
 export async function sendLiveChatMessage(
   text: string,
   agent: AgentId,
@@ -24,7 +30,7 @@ export async function sendLiveChatMessage(
   ];
 
   try {
-    const res = await fetch('/v1/chat/completions', {
+    const res = await fetch(`${GATEWAY_BASE_URL}/v1/chat/completions`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
