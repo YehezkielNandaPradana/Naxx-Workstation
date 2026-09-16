@@ -1,0 +1,197 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!--
+  Nazza Ultra Smooth Motion Graph Preset
+  =======================================
+  Alight Motion 5.0+ Compatible Project XML
+  Canvas: 1080x1920 (9:16) @ 60 FPS
+  Palette: Dark Obsidian 60-30-10
+    - Base: #FF090B10 (60%)
+    - Panel/Card: #FF141923 (30%)
+    - Accent: #FF00F0FF (Cyan Electric 10%)
+    - Typography: #FFFFFFFF
+  Physics: Snap Entrance & Inertial Spring Decel
+-->
+<scene title="Nazza Ultra Smooth Motion"
+       width="1080" height="1920"
+       exportWidth="1080" exportHeight="1920"
+       bgcolor="#FF090B10"
+       totalTime="6000"
+       fps="60"
+       modifiedTime="1700000000000"
+       amver="106"
+       ffver="101"
+       am="com.alightcreative.motion/5.0.0"
+       amplatform="android">
+
+  <!-- ============================================================ -->
+  <!-- LAYER 1: Deep Canvas Background                              -->
+  <!-- ============================================================ -->
+  <shape id="1" label="Background Canvas"
+         startTime="0" endTime="6000"
+         fillType="color" s=".rect">
+    <transform>
+      <location value="540.000000,960.000000" />
+      <scale value="1.000000,1.000000" />
+      <opacity value="1.000000" />
+    </transform>
+    <fillColor value="#FF090B10" />
+    <property name="size" type="vec2" value="1080.000000,1920.000000" />
+  </shape>
+
+  <!-- ============================================================ -->
+  <!-- LAYER 2: Ambient Radial Glow Aura                            -->
+  <!-- ============================================================ -->
+  <shape id="2" label="Ambient Glow Aura"
+         startTime="0" endTime="6000"
+         fillType="color" s=".circle">
+    <transform>
+      <location value="540.000000,960.000000" />
+      <scale type="vec2">
+        <kf t="0.000000" v="0.400000,0.400000" />
+        <kf t="0.250000" v="1.250000,1.250000" e="cubicBezier 0.0 0.0 0.2 1.0" />
+        <kf t="0.600000" v="1.100000,1.100000" e="cubicBezier 0.42 0.0 0.58 1.0" />
+        <kf t="1.000000" v="1.200000,1.200000" e="cubicBezier 0.42 0.0 0.58 1.0" />
+      </scale>
+      <opacity type="float">
+        <kf t="0.000000" v="0.000000" />
+        <kf t="0.150000" v="0.220000" e="cubicBezier 0.0 0.0 0.2 1.0" />
+        <kf t="0.800000" v="0.180000" e="cubicBezier 0.42 0.0 0.58 1.0" />
+        <kf t="1.000000" v="0.220000" />
+      </opacity>
+    </transform>
+    <fillColor value="#FF00F0FF" />
+    <property name="size" type="vec2" value="680.000000,680.000000" />
+  </shape>
+
+  <!-- ============================================================ -->
+  <!-- LAYER 3: Main Glass UI Card (Elastic Spring Pop & Settle)    -->
+  <!-- ============================================================ -->
+  <shape id="3" label="UI Glass Card"
+         startTime="200" endTime="6000"
+         fillType="color" s=".rect">
+    <transform>
+      <!-- Subtle Floating Movement -->
+      <location type="vec3">
+        <kf t="0.000000" v="540.000000,1020.000000,0.000000" />
+        <kf t="0.120000" v="540.000000,950.000000,0.000000" e="cubicBezier 0.0 0.0 0.2 1.0" />
+        <kf t="0.180000" v="540.000000,960.000000,0.000000" e="cubicBezier 0.25 0.1 0.25 1.0" />
+        <kf t="1.000000" v="540.000000,960.000000,0.000000" />
+      </location>
+      <!-- Spring Physics Scale: 0 -> 1.08 -> 0.98 -> 1.0 -->
+      <scale type="vec2">
+        <kf t="0.000000" v="0.000000,0.000000" />
+        <kf t="0.100000" v="1.080000,1.080000" e="cubicBezier 0.0 0.0 0.2 1.0" />
+        <kf t="0.150000" v="0.980000,0.980000" e="cubicBezier 0.25 0.1 0.25 1.0" />
+        <kf t="0.200000" v="1.000000,1.000000" e="cubicBezier 0.25 0.1 0.25 1.0" />
+        <kf t="1.000000" v="1.000000,1.000000" />
+      </scale>
+      <opacity type="float">
+        <kf t="0.000000" v="0.000000" />
+        <kf t="0.070000" v="1.000000" e="cubicBezier 0.0 0.0 0.2 1.0" />
+        <kf t="1.000000" v="1.000000" />
+      </opacity>
+    </transform>
+    <fillColor value="#FF141923" />
+    <property name="size" type="vec2" value="840.000000,480.000000" />
+  </shape>
+
+  <!-- ============================================================ -->
+  <!-- LAYER 4: Cyan Kinetic Accent Line                            -->
+  <!-- ============================================================ -->
+  <shape id="4" label="Accent Glow Line"
+         startTime="400" endTime="6000"
+         fillType="color" s=".rect">
+    <transform>
+      <location value="540.000000,820.000000" />
+      <scale type="vec2">
+        <kf t="0.000000" v="0.000000,1.000000" />
+        <kf t="0.080000" v="1.150000,1.000000" e="cubicBezier 0.0 0.0 0.2 1.0" />
+        <kf t="0.140000" v="1.000000,1.000000" e="cubicBezier 0.25 0.1 0.25 1.0" />
+        <kf t="1.000000" v="1.000000,1.000000" />
+      </scale>
+      <opacity type="float">
+        <kf t="0.000000" v="0.000000" />
+        <kf t="0.060000" v="1.000000" e="cubicBezier 0.0 0.0 0.2 1.0" />
+        <kf t="1.000000" v="1.000000" />
+      </opacity>
+    </transform>
+    <fillColor value="#FF00F0FF" />
+    <property name="size" type="vec2" value="140.000000,6.000000" />
+  </shape>
+
+  <!-- ============================================================ -->
+  <!-- LAYER 5: Primary Title (Kinetic Typography Stagger 1)        -->
+  <!-- ============================================================ -->
+  <text id="5" label="Headline Title"
+        startTime="450" endTime="6000"
+        fillType="color"
+        size="56.000000"
+        font="googlefonts?name=Montserrat&amp;weight=800"
+        wrapWidth="800"
+        align="center">
+    <transform>
+      <location type="vec3">
+        <kf t="0.000000" v="540.000000,940.000000,0.000000" />
+        <kf t="0.100000" v="540.000000,900.000000,0.000000" e="cubicBezier 0.0 0.0 0.2 1.0" />
+        <kf t="0.160000" v="540.000000,905.000000,0.000000" e="cubicBezier 0.25 0.1 0.25 1.0" />
+        <kf t="1.000000" v="540.000000,905.000000,0.000000" />
+      </location>
+      <opacity type="float">
+        <kf t="0.000000" v="0.000000" />
+        <kf t="0.080000" v="1.000000" e="cubicBezier 0.0 0.0 0.2 1.0" />
+        <kf t="1.000000" v="1.000000" />
+      </opacity>
+    </transform>
+    <fillColor value="#FFFFFFFF" />
+    <content>ULTRA SMOOTH</content>
+  </text>
+
+  <!-- ============================================================ -->
+  <!-- LAYER 6: Secondary Subtitle (Kinetic Typography Stagger 2)    -->
+  <!-- ============================================================ -->
+  <text id="6" label="Subtitle Badge"
+        startTime="600" endTime="6000"
+        fillType="color"
+        size="28.000000"
+        font="googlefonts?name=Montserrat&amp;weight=600"
+        wrapWidth="800"
+        align="center">
+    <transform>
+      <location type="vec3">
+        <kf t="0.000000" v="540.000000,1010.000000,0.000000" />
+        <kf t="0.100000" v="540.000000,975.000000,0.000000" e="cubicBezier 0.0 0.0 0.2 1.0" />
+        <kf t="1.000000" v="540.000000,975.000000,0.000000" />
+      </location>
+      <opacity type="float">
+        <kf t="0.000000" v="0.000000" />
+        <kf t="0.080000" v="1.000000" e="cubicBezier 0.0 0.0 0.2 1.0" />
+        <kf t="1.000000" v="1.000000" />
+      </opacity>
+    </transform>
+    <fillColor value="#FF00F0FF" />
+    <content>SPRING PHYSICS CURVE</content>
+  </text>
+
+  <!-- ============================================================ -->
+  <!-- LAYER 7: Dynamic Tagline                                     -->
+  <!-- ============================================================ -->
+  <text id="7" label="Description Tag"
+        startTime="750" endTime="6000"
+        fillType="color"
+        size="20.000000"
+        font="googlefonts?name=Roboto&amp;weight=400"
+        wrapWidth="700"
+        align="center">
+    <transform>
+      <location value="540.000000,1035.000000" />
+      <opacity type="float">
+        <kf t="0.000000" v="0.000000" />
+        <kf t="0.080000" v="0.700000" e="cubicBezier 0.0 0.0 0.2 1.0" />
+        <kf t="1.000000" v="0.700000" />
+      </opacity>
+    </transform>
+    <fillColor value="#FF94A3B8" />
+    <content>Anti-kaku • 60 FPS • Kinetic Easing Preset</content>
+  </text>
+
+</scene>

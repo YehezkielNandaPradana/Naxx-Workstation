@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!--
+  FannMotion Style: Pro Logo Reveal Preset
+  =========================================
+  Platform: Alight Motion 5.0+ Compatible XML
+  Creator Reference: @fannmotion ("Saatnya menghidupkan logomu")
+  Specs: 1080x1920 (9:16) @ 60 FPS | Total: 3.5s (3500ms)
+  Palette: Dark Obsidian Studio (60-30-10)
+    - Canvas: #FF0A0D14
+    - Structure: #FF161B26
+    - Accent Punch: #FF00F0FF (Cyan Neon)
+    - Typography: #FFFFFFFF (Montserrat Bold)
+  Physics: 3-Keyframe Elastic Pop + Masked Slide Up + 60fps Snappy Decel
+-->
+<scene title="FannMotion Pro Logo Reveal"
+       width="1080" height="1920"
+       exportWidth="1080" exportHeight="1920"
+       bgcolor="#FF0A0D14"
+       totalTime="3500"
+       fps="60"
+       modifiedTime="1700000000000"
+       amver="106"
+       ffver="101"
+       am="com.alightcreative.motion/5.0.0"
+       amplatform="android">
+
+  <!-- LAYER 1: Deep Studio Canvas -->
+  <shape id="1" label="Background Canvas" startTime="0" endTime="3500" fillType="color" s=".rect">
+    <transform>
+      <location value="540.000000,960.000000" />
+      <scale value="1.000000,1.000000" />
+      <opacity value="1.000000" />
+    </transform>
+    <fillColor value="#FF0A0D14" />
+    <property name="size" type="vec2" value="1080.000000,1920.000000" />
+  </shape>
+
+  <!-- LAYER 2: Ambient Cyan Core Glow -->
+  <shape id="2" label="Core Glow Aura" startTime="150" endTime="3500" fillType="color" s=".circle">
+    <transform>
+      <location value="540.000000,860.000000" />
+      <scale type="vec2">
+        <kf t="0.000000" v="0.200000,0.200000" />
+        <kf t="0.180000" v="1.250000,1.250000" e="cubicBezier 0.0 0.0 0.2 1.0" />
+        <kf t="1.000000" v="1.400000,1.400000" e="cubicBezier 0.42 0.0 0.58 1.0" />
+      </scale>
+      <opacity type="float">
+        <kf t="0.000000" v="0.000000" />
+        <kf t="0.120000" v="0.220000" e="cubicBezier 0.0 0.0 0.2 1.0" />
+        <kf t="0.800000" v="0.180000" />
+        <kf t="1.000000" v="0.000000" e="cubicBezier 0.4 0.0 1.0 1.0" />
+      </opacity>
+    </transform>
+    <fillColor value="#FF00F0FF" />
+    <property name="size" type="vec2" value="520.000000,520.000000" />
+  </shape>
+
+  <!-- LAYER 3: Outer Accent Border Ring (Trim Path / Scale Snap) -->
+  <shape id="3" label="Accent Ring" startTime="180" endTime="3500" fillType="color" s=".circle">
+    <transform>
+      <location value="540.000000,860.000000" />
+      <scale type="vec2">
+        <kf t="0.000000" v="0.000000,0.000000" />
+        <kf t="0.160000" v="1.150000,1.150000" e="cubicBezier 0.0 0.0 0.2 1.0" />
+        <kf t="0.220000" v="1.000000,1.000000" e="cubicBezier 0.25 0.1 0.25 1.0" />
+        <kf t="1.000000" v="1.020000,1.020000" e="cubicBezier 0.42 0.0 0.58 1.0" />
+      </scale>
+      <opacity type="float">
+        <kf t="0.000000" v="0.000000" />
+        <kf t="0.080000" v="0.800000" e="cubicBezier 0.0 0.0 0.2 1.0" />
+        <kf t="1.000000" v="0.800000" />
+      </opacity>
+    </transform>
+    <fillColor value="#FF00F0FF" />
+    <property name="size" type="vec2" value="250.000000,250.000000" />
+  </shape>
+
+  <!-- LAYER 4: Center Logo Emblem (FannMotion 3-Keyframe Spring Pop) -->
+  <shape id="4" label="Center Logo Badge" startTime="220" endTime="3500" fillType="color" s=".roundrect">
+    <transform>
+      <location value="540.000000,860.000000" />
+      <scale type="vec2">
+        <kf t="0.000000" v="0.000000,0.000000" />
+        <kf t="0.140000" v="1.100000,1.100000" e="cubicBezier 0.0 0.0 0.2 1.0" />
+        <kf t="0.200000" v="0.980000,0.980000" e="cubicBezier 0.25 0.1 0.25 1.0" />
+        <kf t="0.260000" v="1.000000,1.000000" e="cubicBezier 0.25 0.1 0.25 1.0" />
+        <kf t="1.000000" v="1.020000,1.020000" e="cubicBezier 0.42 0.0 0.58 1.0" />
+      </scale>
+      <opacity type="float">
+        <kf t="0.000000" v="0.000000" />
+        <kf t="0.060000" v="1.000000" e="cubicBezier 0.0 0.0 0.2 1.0" />
+        <kf t="1.000000" v="1.000000" />
+      </opacity>
+    </transform>
+    <fillColor value="#FF161B26" />
+    <property name="size" type="vec2" value="220.000000,220.000000" />
+  </shape>
+
+  <!-- LAYER 5: Logo Inner Icon Highlight -->
+  <shape id="5" label="Inner Emblem Graphic" startTime="260" endTime="3500" fillType="color" s=".rect">
+    <transform>
+      <location value="540.000000,860.000000" />
+      <rotation type="float">
+        <kf t="0.000000" v="-45.000000" />
+        <kf t="0.160000" v="45.000000" e="cubicBezier 0.0 0.0 0.2 1.0" />
+        <kf t="1.000000" v="45.000000" />
+      </rotation>
+      <scale type="vec2">
+        <kf t="0.000000" v="0.000000,0.000000" />
+        <kf t="0.140000" v="1.150000,1.150000" e="cubicBezier 0.0 0.0 0.2 1.0" />
+        <kf t="0.220000" v="1.000000,1.000000" e="cubicBezier 0.25 0.1 0.25 1.0" />
+        <kf t="1.000000" v="1.000000,1.000000" />
+      </scale>
+      <opacity type="float">
+        <kf t="0.000000" v="0.000000" />
+        <kf t="0.080000" v="1.000000" e="cubicBezier 0.0 0.0 0.2 1.0" />
+        <kf t="1.000000" v="1.000000" />
+      </opacity>
+    </transform>
+    <fillColor value="#FF00F0FF" />
+    <property name="size" type="vec2" value="75.000000,75.000000" />
+  </shape>
+
+  <!-- LAYER 6: Brand Name Typography (Masked Slide Up) -->
+  <text id="6" label="Brand Name"
+        startTime="450" endTime="3500"
+        fillType="color"
+        size="64.000000"
+        font="googlefonts?name=Montserrat&amp;weight=800"
+        wrapWidth="900"
+        align="center">
+    <transform>
+      <location type="vec3">
+        <kf t="0.000000" v="540.000000,1080.000000,0.000000" />
+        <kf t="0.140000" v="540.000000,1035.000000,0.000000" e="cubicBezier 0.0 0.0 0.2 1.0" />
+        <kf t="1.000000" v="540.000000,1035.000000,0.000000" />
+      </location>
+      <opacity type="float">
+        <kf t="0.000000" v="0.000000" />
+        <kf t="0.090000" v="1.000000" e="cubicBezier 0.0 0.0 0.2 1.0" />
+        <kf t="1.000000" v="1.000000" />
+      </opacity>
+    </transform>
+    <fillColor value="#FFFFFFFF" />
+    <content>FANN MOTION</content>
+  </text>
+
+  <!-- LAYER 7: Slogan / Tagline Typography -->
+  <text id="7" label="Brand Tagline"
+        startTime="600" endTime="3500"
+        fillType="color"
+        size="24.000000"
+        font="googlefonts?name=Roboto&amp;weight=500"
+        wrapWidth="850"
+        align="center">
+    <transform>
+      <location value="540.000000,1095.000000" />
+      <opacity type="float">
+        <kf t="0.000000" v="0.000000" />
+        <kf t="0.120000" v="0.750000" e="cubicBezier 0.0 0.0 0.2 1.0" />
+        <kf t="1.000000" v="0.750000" />
+      </opacity>
+    </transform>
+    <fillColor value="#FF00F0FF" />
+    <content>SAATNYA MENGHIDUPKAN LOGOMU</content>
+  </text>
+
+</scene>
