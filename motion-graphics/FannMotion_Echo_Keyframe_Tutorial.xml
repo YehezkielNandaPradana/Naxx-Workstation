@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!--
+  FannMotion "Part 4 - Echo Keyframe" Preset
+  ==========================================
+  Recreation of: https://vt.tiktok.com/@fannmotion/video/7448445371434487045
+  Effect: Echo Keyframes (Motion Trail / Ghosting)
+  Settings from tutorial:
+    - Seconds (Detik): 0.500s
+    - Count (Jumlah): 20
+    - Alpha: 0.00 (fades out completely towards the tail)
+    - Composite: Behind (Mode: 1)
+  Canvas: 1080x1920 @ 60 FPS
+-->
+<scene title="FannMotion Echo Keyframe"
+       width="1080" height="1920"
+       exportWidth="1080" exportHeight="1920"
+       bgcolor="#FF0A0D14"
+       totalTime="5000"
+       fps="60"
+       modifiedTime="1700000000000"
+       amver="106"
+       ffver="101"
+       am="com.alightcreative.motion/5.0.0"
+       amplatform="android">
+
+  <!-- ============================================================ -->
+  <!-- LAYER 1: Canvas Background                                   -->
+  <!-- ============================================================ -->
+  <shape id="1" label="Background Canvas" startTime="0" endTime="5000" fillType="color" s=".rect">
+    <transform>
+      <location value="540.000000,960.000000" />
+      <scale value="1.000000,1.000000" />
+      <opacity value="1.000000" />
+    </transform>
+    <fillColor value="#FF0A0D14" />
+    <property name="size" type="vec2" value="1080.000000,1920.000000" />
+  </shape>
+
+  <!-- ============================================================ -->
+  <!-- LAYER 2: Showcase Window Container (macOS UI Card)           -->
+  <!-- ============================================================ -->
+  <shape id="2" label="Showcase Window Card" startTime="0" endTime="5000" fillType="color" s=".roundrect">
+    <transform>
+      <location value="540.000000,960.000000" />
+      <scale value="1.000000,1.000000" />
+      <opacity value="1.000000" />
+    </transform>
+    <fillColor value="#FF121722" />
+    <property name="size" type="vec2" value="920.000000,720.000000" />
+  </shape>
+
+  <!-- Window Header Bar -->
+  <shape id="3" label="Card Header Bar" startTime="0" endTime="5000" fillType="color" s=".rect">
+    <transform>
+      <location value="540.000000,640.000000" />
+    </transform>
+    <fillColor value="#FF1A2130" />
+    <property name="size" type="vec2" value="920.000000,80.000000" />
+  </shape>
+
+  <!-- Traffic Dots (Red, Yellow, Green) -->
+  <shape id="4" label="Dot Red" startTime="0" endTime="5000" fillType="color" s=".circle">
+    <transform>
+      <location value="140.000000,640.000000" />
+    </transform>
+    <fillColor value="#FFFF5F56" />
+    <property name="size" type="vec2" value="20.000000,20.000000" />
+  </shape>
+
+  <shape id="5" label="Dot Yellow" startTime="0" endTime="5000" fillType="color" s=".circle">
+    <transform>
+      <location value="175.000000,640.000000" />
+    </transform>
+    <fillColor value="#FFFFBD2E" />
+    <property name="size" type="vec2" value="20.000000,20.000000" />
+  </shape>
+
+  <shape id="6" label="Dot Green" startTime="0" endTime="5000" fillType="color" s=".circle">
+    <transform>
+      <location value="210.000000,640.000000" />
+    </transform>
+    <fillColor value="#FF27C93F" />
+    <property name="size" type="vec2" value="20.000000,20.000000" />
+  </shape>
+
+  <!-- ============================================================ -->
+  <!-- LAYER 7: THE HERO MOVING CAPSULE WITH ECHO KEYFRAMES EFFECT  -->
+  <!-- ============================================================ -->
+  <shape id="7" label="Hero Capsule with Echo" startTime="0" endTime="5000" fillType="color" s=".roundrect">
+    <transform>
+      <!-- Keyframe Movement: Slide Right, Pause, Slide Back -->
+      <location type="vec3">
+        <!-- 0ms - 600ms: Start at left position -->
+        <kf t="0.000000" v="280.000000,960.000000,0.000000" />
+        <kf t="0.120000" v="280.000000,960.000000,0.000000" e="cubicBezier 0.0 0.0 0.2 1.0" />
+        <!-- 600ms - 2000ms: Slide aggressively to right (t=0.12 to t=0.40) -->
+        <kf t="0.400000" v="800.000000,960.000000,0.000000" e="cubicBezier 0.42 0.0 0.58 1.0" />
+        <!-- 2000ms - 3000ms: Hold at right (t=0.40 to t=0.60) -->
+        <kf t="0.600000" v="800.000000,960.000000,0.000000" e="cubicBezier 0.0 0.0 0.2 1.0" />
+        <!-- 3000ms - 4400ms: Slide back to left (t=0.60 to t=0.88) -->
+        <kf t="0.880000" v="280.000000,960.000000,0.000000" e="cubicBezier 0.42 0.0 0.58 1.0" />
+        <kf t="1.000000" v="280.000000,960.000000,0.000000" />
+      </location>
+      <scale value="1.000000,1.000000" />
+      <opacity value="1.000000" />
+    </transform>
+
+    <fillColor value="#FF00E5FF" />
+    <property name="size" type="vec2" value="180.000000,100.000000" />
+
+    <!-- EXACT FANNMOTION ECHO KEYFRAMES EFFECT CONFIGURATION -->
+    <effect id="com.alightcreative.effects.repeat.echokf" locallyApplied="true">
+      <!-- Seconds (Detik): 0.500s temporal trail reach -->
+      <property name="seconds" type="float" value="0.500000" />
+      <!-- Count (Jumlah): 20 ghosting echo clones -->
+      <property name="count" type="float" value="20.000000" />
+      <!-- Alpha: 0.00 (tail fades smoothly to 0% opacity) -->
+      <property name="alpha" type="float" value="0.000000" />
+      <!-- Mode / Composite: 1 = Behind (Draw echoes underneath hero object) -->
+      <property name="mode" type="int" value="1" />
+    </effect>
+  </shape>
+
+  <!-- ============================================================ -->
+  <!-- LAYER 8: Top Question Headline ("HOW TO MAKE THIS?")         -->
+  <!-- ============================================================ -->
+  <text id="8" label="Headline Question"
+        startTime="0" endTime="5000"
+        fillType="color"
+        size="52.000000"
+        font="googlefonts?name=Montserrat&amp;weight=800"
+        wrapWidth="900"
+        align="center">
+    <transform>
+      <location value="540.000000,460.000000" />
+    </transform>
+    <fillColor value="#FFFFFFFF" />
+    <content>HOW TO MAKE THIS?</content>
+  </text>
+
+  <!-- ============================================================ -->
+  <!-- LAYER 9: Subtitle ("Part 4 - Echo Keyframe")                 -->
+  <!-- ============================================================ -->
+  <text id="9" label="Subheader Title"
+        startTime="0" endTime="5000"
+        fillType="color"
+        size="28.000000"
+        font="googlefonts?name=Montserrat&amp;weight=600"
+        wrapWidth="800"
+        align="center">
+    <transform>
+      <location value="540.000000,530.000000" />
+    </transform>
+    <fillColor value="#FF00E5FF" />
+    <content>Part 4 - Echo Keyframe</content>
+  </text>
+
+  <!-- ============================================================ -->
+  <!-- LAYER 10: Settings Parameters Badge (Overlay UI)             -->
+  <!-- ============================================================ -->
+  <text id="10" label="Settings Readout"
+        startTime="0" endTime="5000"
+        fillType="color"
+        size="22.000000"
+        font="googlefonts?name=Roboto&amp;weight=500"
+        wrapWidth="800"
+        align="center">
+    <transform>
+      <location value="540.000000,1400.000000" />
+    </transform>
+    <fillColor value="#FF94A3B8" />
+    <content>Detik: 0.500s  •  Jumlah: 20  •  Alpha: 0  •  Mode: Behind</content>
+  </text>
+
+  <!-- Bottom Attribution -->
+  <text id="11" label="Author Credit"
+        startTime="0" endTime="5000"
+        fillType="color"
+        size="18.000000"
+        font="googlefonts?name=Roboto&amp;weight=400"
+        wrapWidth="800"
+        align="center">
+    <transform>
+      <location value="540.000000,1450.000000" />
+    </transform>
+    <fillColor value="#FF64748B" />
+    <content>Tutorial Reference: @fannmotion (Alight Motion)</content>
+  </text>
+
+</scene>
