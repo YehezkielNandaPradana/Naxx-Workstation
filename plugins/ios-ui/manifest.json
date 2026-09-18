@@ -1,0 +1,12 @@
+{
+  "name": "iOS UI Style",
+  "description": "Squircle avatars, rounded iMessage-style cards, and capsule pill chat input.",
+  "authors": [
+    {
+      "name": "Delta"
+    }
+  ],
+  "main": "index.js",
+  "version": "1.0.0",
+  "hash": "668706ae4cd0bafad343fac16034ef6f6532ea8c19f7d3922a2207b6f795d10e"
+}
