@@ -377,6 +377,79 @@ code {
   }
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   Naxx Workstation — Pinterest AI Dashboard Spring Physics & Luxe UI
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  --spring-bounce: cubic-bezier(0.16, 1, 0.3, 1);
+  --spring-snappy: cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+
+/* Pinterest Ambient Mesh Background */
+.workstation-mesh-bg {
+  background-color: var(--theme-bg, #09090b);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(245, 158, 11, 0.035) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.04) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(16, 185, 129, 0.03) 0px, transparent 50%);
+  background-attachment: fixed;
+}
+
+/* Ultra-smooth micro-interactions */
+.smooth-spring {
+  transition: all 0.25s var(--spring-bounce);
+}
+
+.bouncy-hover {
+  transition: transform 0.22s var(--spring-bounce), box-shadow 0.22s ease, border-color 0.22s ease;
+}
+.bouncy-hover:hover {
+  transform: translateY(-2px);
+}
+.bouncy-hover:active {
+  transform: scale(0.97);
+}
+
+.bouncy-btn {
+  transition: transform 0.18s var(--spring-bounce), background-color 0.18s ease, border-color 0.18s ease;
+}
+.bouncy-btn:active {
+  transform: scale(0.96);
+}
+
+/* Floating Glassmorphism Cards */
+.floating-glass-card {
+  background: rgba(18, 18, 24, 0.75) !important;
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.07) !important;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5) !important;
+}
+
+.floating-glass-card:hover {
+  border-color: rgba(245, 158, 11, 0.25) !important;
+  box-shadow: 0 14px 40px -10px rgba(245, 158, 11, 0.08), 0 0 20px rgba(245, 158, 11, 0.05) !important;
+}
+
+/* Breathing Agent Status Indicator */
+@keyframes breathing-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.5);
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.85;
+    box-shadow: 0 0 10px 3px rgba(245, 158, 11, 0.25);
+  }
+}
+.breathing-dot {
+  animation: breathing-pulse 2.6s var(--spring-bounce) infinite;
+}
+
+
 .thinking-shimmer-bubble {
   /* bubble bg — slightly elevated from surface */
   background-color: var(--color-primary-100);
@@ -1158,49 +1231,49 @@ code {
    ============================================================ */
 
 [data-theme='claude-nous'] {
-  --theme-bg: #041c1c;
-  --theme-sidebar: #06282a;
-  --theme-panel: #06282a;
-  --theme-card: #082f31;
-  --theme-card2: #0a3638;
-  --theme-border: rgba(255, 230, 203, 0.2);
-  --theme-border-subtle: rgba(255, 230, 203, 0.1);
-  --theme-text: #ffe6cb;
-  --theme-muted: rgba(255, 230, 203, 0.6);
-  --theme-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.55);
-  --theme-shadow-2: 0 6px 16px rgba(0, 0, 0, 0.48);
-  --theme-shadow-3: 0 16px 36px rgba(0, 0, 0, 0.58);
-  --theme-glass: rgba(4, 28, 28, 0.88);
-  --theme-focus: #ffac02;
-  --theme-accent: #ffac02;
-  --theme-accent-secondary: #ffe6cb;
-  --theme-accent-subtle: rgba(255, 172, 2, 0.12);
-  --theme-accent-border: rgba(255, 172, 2, 0.28);
-  --theme-active: #ffac02;
-  --theme-link: #ffe6cb;
-  --theme-success: #8fff89;
-  --theme-warning: #ffac02;
-  --theme-danger: #fb2c36;
-  --theme-stripe: rgba(255, 230, 203, 0.05);
-  --theme-header-bg: #041c1c;
-  --theme-header-border: rgba(255, 230, 203, 0.2);
-  --chat-user-bg: #08302d;
-  --chat-user-border: rgba(255, 172, 2, 0.28);
-  --chat-user-foreground: #ffe6cb;
-  --chat-assistant-bg: #06282a;
-  --chat-assistant-border: rgba(255, 230, 203, 0.1);
-  --chat-assistant-foreground: #ffe6cb;
-  --composer-bg: #06282a;
-  --composer-border: rgba(255, 230, 203, 0.2);
-  --composer-placeholder: rgba(255, 230, 203, 0.45);
-  --tool-card-bg: #06282a;
-  --tool-card-border: rgba(255, 230, 203, 0.15);
-  --tool-card-title: #ffe6cb;
-  --tool-card-muted: rgba(255, 230, 203, 0.55);
-  --code-bg: #02181a;
-  --code-border: rgba(255, 230, 203, 0.12);
-  --code-foreground: #8fff89;
-  --theme-input: #06282a;
+  --theme-bg: #09090b;
+  --theme-sidebar: #0d0d12;
+  --theme-panel: #111117;
+  --theme-card: #14141c;
+  --theme-card2: #181824;
+  --theme-border: rgba(255, 255, 255, 0.08);
+  --theme-border-subtle: rgba(255, 255, 255, 0.04);
+  --theme-text: #f4f4f6;
+  --theme-muted: #9ca3af;
+  --theme-shadow-1: 0 2px 8px rgba(0, 0, 0, 0.45);
+  --theme-shadow-2: 0 10px 28px rgba(0, 0, 0, 0.6);
+  --theme-shadow-3: 0 20px 48px rgba(0, 0, 0, 0.75);
+  --theme-glass: rgba(13, 13, 18, 0.82);
+  --theme-focus: #f59e0b;
+  --theme-accent: #f59e0b;
+  --theme-accent-secondary: #fbbf24;
+  --theme-accent-subtle: rgba(245, 158, 11, 0.12);
+  --theme-accent-border: rgba(245, 158, 11, 0.28);
+  --theme-active: #f59e0b;
+  --theme-link: #fbbf24;
+  --theme-success: #10b981;
+  --theme-warning: #f59e0b;
+  --theme-danger: #ef4444;
+  --theme-stripe: rgba(255, 255, 255, 0.02);
+  --theme-header-bg: rgba(9, 9, 11, 0.85);
+  --theme-header-border: rgba(255, 255, 255, 0.07);
+  --chat-user-bg: #1c1917;
+  --chat-user-border: rgba(245, 158, 11, 0.25);
+  --chat-user-foreground: #fef3c7;
+  --chat-assistant-bg: #121218;
+  --chat-assistant-border: rgba(255, 255, 255, 0.07);
+  --chat-assistant-foreground: #f4f4f6;
+  --composer-bg: rgba(18, 18, 24, 0.88);
+  --composer-border: rgba(255, 255, 255, 0.09);
+  --composer-placeholder: rgba(244, 244, 246, 0.4);
+  --tool-card-bg: #13131a;
+  --tool-card-border: rgba(255, 255, 255, 0.08);
+  --tool-card-title: #f4f4f6;
+  --tool-card-muted: #9ca3af;
+  --code-bg: #0c0c10;
+  --code-border: rgba(255, 255, 255, 0.07);
+  --code-foreground: #10b981;
+  --theme-input: #121218;
 }
 
 [data-theme='claude-nous-light'] {

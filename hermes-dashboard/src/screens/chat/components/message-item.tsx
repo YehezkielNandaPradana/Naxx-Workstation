@@ -2689,11 +2689,10 @@ function MessageItemComponent({
           <div
             data-chat-message-bubble={isUser ? 'user' : 'assistant'}
             className={cn(
-              'break-words whitespace-normal min-w-0 flex flex-col gap-2 px-3 py-2 max-w-[80%]',
-              '',
+              'break-words whitespace-normal min-w-0 flex flex-col gap-2.5 px-4 py-3 max-w-[85%] smooth-spring shadow-lg',
               !isUser
-                ? 'border rounded-2xl rounded-tl-sm'
-                : 'text-white rounded-2xl rounded-tr-sm',
+                ? 'border rounded-2xl rounded-tl-md'
+                : 'rounded-2xl rounded-tr-md',
               isQueued && isUser && !isFailed && 'opacity-70',
               isFailed && isUser && 'bg-red-50/50 border border-red-300',
               bubbleClassName,

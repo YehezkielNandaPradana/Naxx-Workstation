@@ -138,11 +138,11 @@ function SessionItemComponent({
       }}
       className={cn(
         'group inline-flex items-center justify-between',
-        'w-full text-left pl-1.5 pr-0.5 h-14 rounded-lg transition-colors duration-0',
+        'w-full text-left px-3 py-2.5 my-0.5 rounded-xl transition-all duration-200 bouncy-btn',
         'select-none',
         active
-          ? 'bg-primary-200 text-primary-950'
-          : 'bg-transparent text-primary-950 [&:hover:not(:has(button:hover))]:bg-primary-200',
+          ? 'bg-[#181822] text-white border border-amber-500/25 shadow-sm'
+          : 'bg-transparent text-zinc-300 hover:bg-white/[0.04] hover:text-white',
       )}
     >
       <div className="flex-1 min-w-0 py-1.5">

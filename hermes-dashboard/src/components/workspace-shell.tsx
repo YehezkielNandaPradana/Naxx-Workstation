@@ -310,7 +310,7 @@ export function WorkspaceShell({ children }: WorkspaceShellProps) {
   return (
     <>
       <div
-        className="relative overflow-hidden theme-bg theme-text"
+        className="relative overflow-hidden theme-bg theme-text workstation-mesh-bg"
         style={shellStyle}
       >
         <ClaudeReconnectBanner enabled={authState.checked} />

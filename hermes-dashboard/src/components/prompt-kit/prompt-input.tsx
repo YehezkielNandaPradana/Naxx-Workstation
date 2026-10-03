@@ -167,7 +167,9 @@ function PromptInput({
           style={{
             background: 'var(--composer-bg)',
             border: '1px solid var(--composer-border)',
-            boxShadow: 'var(--theme-shadow-1)',
+            boxShadow: '0 8px 30px rgba(0, 0, 0, 0.45)',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
           }}
           {...props}
         >

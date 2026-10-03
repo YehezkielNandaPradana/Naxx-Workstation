@@ -137,12 +137,12 @@ function GlassCard({
   return (
     <div
       className={cn(
-        'relative flex flex-col overflow-hidden rounded-xl border transition-colors',
+        'relative flex flex-col overflow-hidden rounded-2xl border transition-all duration-300 bouncy-card floating-glass-card shadow-xl',
         className,
       )}
       style={{
-        background: 'var(--theme-card)',
-        borderColor: 'var(--theme-border)',
+        background: 'rgba(18, 18, 25, 0.75)',
+        borderColor: 'rgba(255, 255, 255, 0.07)',
       }}
     >
       {accentColor && (
@@ -912,16 +912,23 @@ export function DashboardScreen() {
               the lockup matches the height of the action cluster on
               the right so they don't visually drift. */}
           <div className="flex flex-col justify-center">
-            <h1
-              className="text-2xl font-bold tracking-tight"
-              style={{
-                color: 'var(--theme-text)',
-                letterSpacing: '-0.015em',
-                lineHeight: 1.1,
-              }}
-            >
-              Hermes Workspace
-            </h1>
+            <div className="flex items-center gap-2">
+              <h1
+                className="text-2xl font-bold tracking-tight text-white"
+                style={{
+                  letterSpacing: '-0.02em',
+                  lineHeight: 1.1,
+                }}
+              >
+                Hermes Dashboard
+              </h1>
+              <span className="rounded-full border border-amber-500/30 bg-amber-500/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-amber-400">
+                Naxx Workstation
+              </span>
+            </div>
+            <p className="text-xs text-zinc-400 mt-0.5">
+              Dual-Agent Fleet Orchestration & System Monitoring Hub
+            </p>
           </div>
         </div>
         {/* Action row: hierarchy per Hermes Agent review.

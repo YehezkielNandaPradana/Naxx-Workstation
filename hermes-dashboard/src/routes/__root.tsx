@@ -84,13 +84,13 @@ const themeColorScript = `
     const root = document.documentElement
     const theme = root.getAttribute('data-theme') || '${DEFAULT_THEME}'
     const colors = {
-      'claude-nous': '#031A1A',
+      'claude-nous': '#09090b',
       'claude-nous-light': '#F8FAF8',
-      'claude-official': '#0A0E1A',
+      'claude-official': '#09090b',
       'claude-official-light': '#F7F7F1',
       'claude-classic': '#0d0f12',
       'claude-classic-light': '#F5F2ED',
-      'claude-slate': '#0d1117',
+      'claude-slate': '#09090b',
       'claude-slate-light': '#F6F8FA',
     }
     const nextColor = colors[theme] || colors['${DEFAULT_THEME}']
@@ -109,10 +109,10 @@ const themeColorScript = `
 `
 
 const DEFAULT_SPLASH_HTML = `
-<img src="/claude-avatar.webp" alt="Hermes Agent" style="width:80px;height:80px;margin-bottom:20px;border-radius:16px;filter:drop-shadow(0 8px 32px color-mix(in srgb,#FFAC02 45%, transparent))" />
-<img src="/claude-banner.png" alt="Hermes Workspace" style="width:280px;height:auto;margin-bottom:8px;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.5))" />
-<div style="font:400 14px/1 system-ui,-apple-system,sans-serif;letter-spacing:0.04em;color:#9CB2AE">Workspace</div>
-<div style="margin-top:28px;width:140px;height:3px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;position:relative"><div id="splash-bar" style="width:0%;height:100%;background:#FFAC02;border-radius:3px;transition:width 0.4s ease"></div></div>
+<img src="/claude-avatar.webp" alt="Hermes Agent" style="width:72px;height:72px;margin-bottom:16px;border-radius:20px;filter:drop-shadow(0 10px 30px rgba(245,158,11,0.35))" />
+<div style="font:600 20px/1.2 system-ui,-apple-system,sans-serif;letter-spacing:-0.02em;color:#f4f4f6;margin-bottom:6px">Hermes Dashboard</div>
+<div style="font:500 12px/1 system-ui,-apple-system,sans-serif;letter-spacing:0.06em;text-transform:uppercase;color:#f59e0b">Naxx Workstation</div>
+<div style="margin-top:24px;width:140px;height:3px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;position:relative"><div id="splash-bar" style="width:0%;height:100%;background:linear-gradient(90deg, #f59e0b, #fbbf24);border-radius:3px;transition:width 0.4s cubic-bezier(0.16, 1, 0.3, 1)"></div></div>
 `
 
 export const Route = createRootRoute({

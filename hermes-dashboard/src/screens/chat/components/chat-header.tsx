@@ -306,8 +306,8 @@ function ChatHeaderComponent({
   }
 
   return (
-    <div ref={wrapperRef} className="shrink-0 bg-surface">
-      <div className="px-4 h-12 flex items-center">
+    <div ref={wrapperRef} className="shrink-0 bg-[#09090b]/80 backdrop-blur-2xl border-b border-white/[0.07]">
+      <div className="px-5 h-14 flex items-center">
         {showFileExplorerButton ? (
           <TooltipProvider>
             <TooltipRoot>
@@ -362,13 +362,17 @@ function ChatHeaderComponent({
             />
           ) : (
             <div
-              className="relative flex items-center gap-1"
+              className="relative flex items-center gap-2"
               ref={sessionPopoverRef}
             >
+              <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-amber-500/25 bg-amber-500/10 text-[11px] font-semibold text-amber-400 shrink-0 select-none">
+                <span className="size-2 rounded-full bg-amber-400 breathing-dot" />
+                <span>NAXX CORE</span>
+              </div>
               <button
                 type="button"
                 onClick={() => setSessionPopoverOpen((p) => !p)}
-                className="min-w-0 truncate text-sm font-medium text-balance hover:text-accent-600 transition-colors rounded-sm text-left"
+                className="min-w-0 truncate text-sm font-semibold text-zinc-100 hover:text-amber-400 transition-colors rounded-sm text-left"
                 title="Click to switch session"
               >
                 {activeTitle}

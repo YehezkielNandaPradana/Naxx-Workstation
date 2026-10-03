@@ -179,11 +179,11 @@ function NavItem({
 }) {
   const cls = cn(
     buttonVariants({ variant: 'ghost', size: 'sm' }),
-    'w-full h-auto min-h-11 gap-2.5 py-2 md:min-h-0',
+    'w-full h-auto min-h-11 gap-2.5 py-2 md:min-h-0 rounded-xl transition-all bouncy-btn',
     isCollapsed ? 'justify-center px-0' : 'justify-start px-3',
     item.active
-      ? 'bg-accent-500/10 text-accent-500 hover:bg-accent-50 dark:hover:bg-accent-900/300/15'
-      : 'text-primary-900 hover:bg-primary-200 dark:hover:bg-primary-800',
+      ? 'bg-gradient-to-r from-amber-500/15 to-amber-500/5 text-amber-400 font-semibold border border-amber-500/20 shadow-sm'
+      : 'text-zinc-400 hover:text-zinc-100 hover:bg-white/[0.05]',
   )
 
   const iconEl =
@@ -876,7 +876,7 @@ function ChatSidebarComponent({
 
   const asideProps = {
     className: cn(
-      'border-r h-full overflow-hidden flex flex-col theme-sidebar theme-border',
+      'border-r h-full overflow-hidden flex flex-col bg-[#0c0c11]/90 backdrop-blur-2xl border-white/[0.07] theme-text',
       isMobile && 'fixed inset-y-0 left-0 z-50 shadow-2xl',
       isMobile && isCollapsed && 'pointer-events-none',
     ),
@@ -1096,20 +1096,27 @@ function ChatSidebarComponent({
                 to="/chat"
                 className={cn(
                   buttonVariants({ variant: 'ghost', size: 'sm' }),
-                  'w-full pl-1.5 justify-start gap-2',
+                  'w-full pl-1.5 justify-start gap-2.5 rounded-xl hover:bg-white/[0.05] transition-all bouncy-btn',
                 )}
               >
-                <img
-                  src="/claude-avatar.webp"
-                  alt="Hermes Agent"
-                  className="size-6 rounded-lg"
-                />
-                <span
-                  className="text-sm font-semibold tracking-tight"
-                  style={{ color: 'var(--theme-text)' }}
-                >
-                  Hermes Dashboard
-                </span>
+                <div className="relative size-7 rounded-xl bg-gradient-to-tr from-amber-500/20 to-purple-500/20 p-0.5 border border-white/10 flex items-center justify-center shrink-0">
+                  <img
+                    src="/claude-avatar.webp"
+                    alt="Hermes Agent"
+                    className="size-full rounded-[9px] object-cover"
+                  />
+                  <span className="absolute -bottom-0.5 -right-0.5 size-2 rounded-full bg-amber-500 breathing-dot" />
+                </div>
+                <div className="flex flex-col min-w-0 text-left">
+                  <span
+                    className="text-xs font-bold tracking-tight text-white truncate"
+                  >
+                    Hermes Dashboard
+                  </span>
+                  <span className="text-[10px] font-medium text-amber-400/90 tracking-wide uppercase">
+                    Naxx Workstation
+                  </span>
+                </div>
               </Link>
             </motion.div>
           ) : null}
