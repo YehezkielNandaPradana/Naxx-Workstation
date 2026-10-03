@@ -767,20 +767,20 @@ function ChatSidebarComponent({
 
   // Collapsible section states
   const [mainExpanded, toggleMain] = usePersistedBool(
-    'claude-sidebar-main-expanded',
-    true,
+    'naxx-sidebar-main-v2',
+    false,
   )
   const [chatExpanded, toggleChat] = usePersistedBool(
-    'hermes-sidebar-chat-expanded',
+    'naxx-sidebar-chat-v2',
     true,
   )
   const [workspaceExpanded, toggleWorkspace] = usePersistedBool(
-    'hermes-sidebar-workspace-expanded',
+    'naxx-sidebar-workspace-v2',
     false,
   )
   const [knowledgeExpanded, toggleKnowledge] = usePersistedBool(
-    'claude-sidebar-knowledge-expanded',
-    true,
+    'naxx-sidebar-knowledge-v2',
+    false,
   )
   const [_systemExpanded, _toggleSystem] = usePersistedBool(
     'claude-sidebar-system-expanded',

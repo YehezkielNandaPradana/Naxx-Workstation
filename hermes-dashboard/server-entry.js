@@ -1,3 +1,4 @@
+import './env-init.js'
 import { createServer } from 'node:http'
 import { readFile, stat } from 'node:fs/promises'
 import { join, extname } from 'node:path'
@@ -289,6 +290,13 @@ async function requestHandler(req, res) {
 
 function listenOn(bindHost) {
   const httpServer = createServer(requestHandler)
+  httpServer.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.warn(`[server] Warning: Port ${port} on ${bindHost} is in use. If another instance is running, please close it.`)
+    } else {
+      console.error('[server] Server error:', err)
+    }
+  })
   httpServer.listen(port, bindHost, () => {
     console.log(`Hermes Dashboard (Naxx Workstation) running at http://${bindHost}:${port}`)
   })

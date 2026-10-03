@@ -452,8 +452,8 @@ function mapSessionToHistoryItem(
 export const useAgentViewStore = create<AgentViewState>()(
   persist(
     (set) => ({
-      isOpen: inferInitialOpenState(),
-      queueOpen: true,
+      isOpen: false,
+      queueOpen: false,
       historyOpen: false,
       setOpen: function setOpen(isOpen) {
         set({ isOpen })
@@ -469,7 +469,7 @@ export const useAgentViewStore = create<AgentViewState>()(
       },
     }),
     {
-      name: 'agent-view-state',
+      name: 'naxx-dashboard-agent-view-v2',
     },
   ),
 )
