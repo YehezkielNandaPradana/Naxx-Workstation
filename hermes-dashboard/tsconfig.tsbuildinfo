@@ -1,1 +1,0 @@
-{"root":["./src/app.tsx","./src/main.tsx","./src/components/chat/chatscreen.tsx","./src/components/cron/cronscreen.tsx","./src/components/files/fileexplorerscreen.tsx","./src/components/memory/memoryscreen.tsx","./src/components/skills/skillsscreen.tsx","./src/components/swarm/swarmscreen.tsx","./src/components/terminal/terminalscreen.tsx"],"version":"6.0.3"}
