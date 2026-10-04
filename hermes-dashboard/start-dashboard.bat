@@ -9,22 +9,22 @@ echo   Hermes Dashboard - Naxx Workstation
 echo ========================================================
 echo.
 
-rem Cari port yang belum terpakai (3000, 3100, 3200, 3300)
+rem Cek apakah dashboard sudah berjalan di port 3000
+curl -s http://127.0.0.1:3000/api/sessions >nul 2>&1
+if %errorlevel% equ 0 (
+    echo [OK] Hermes Dashboard sudah aktif berjalan di http://localhost:3000!
+    echo [*] Membuka browser...
+    start http://localhost:3000
+    timeout /t 2 >nul
+    exit /b 0
+)
+
+rem Jika belum jalan, periksa ketersediaan port
 set PORT=3000
 netstat -ano | findstr /R /C:":3000 .*LISTENING" >nul
 if !errorlevel! equ 0 (
-    echo [i] Port 3000 sedang aktif oleh instance lain.
+    echo [i] Port 3000 dipakai proses lain, mencoba port 3100...
     set PORT=3100
-    netstat -ano | findstr /R /C:":3100 .*LISTENING" >nul
-    if !errorlevel! equ 0 (
-        echo [i] Port 3100 juga aktif.
-        set PORT=3200
-        netstat -ano | findstr /R /C:":3200 .*LISTENING" >nul
-        if !errorlevel! equ 0 (
-            echo [i] Port 3200 aktif, beralih ke Port 3300.
-            set PORT=3300
-        )
-    )
 )
 
 echo [*] Menjalankan Hermes Dashboard di http://localhost:%PORT% ...
