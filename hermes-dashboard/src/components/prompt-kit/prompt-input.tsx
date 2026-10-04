@@ -160,7 +160,8 @@ function PromptInput({
           onClick={handleClick}
           onPointerDown={handlePointerDown}
           className={cn(
-            'cursor-text rounded-3xl py-3 gap-3 flex flex-col touch-manipulation mb-2',
+            'cursor-text rounded-2xl p-3 gap-2.5 flex flex-col touch-manipulation mb-2 transition-all duration-150',
+            'focus-within:border-white/[0.22] focus-within:shadow-md',
             disabled && 'cursor-not-allowed opacity-60',
             className,
           )}

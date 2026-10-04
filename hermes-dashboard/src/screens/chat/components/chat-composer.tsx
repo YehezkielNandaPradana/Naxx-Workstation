@@ -2748,14 +2748,14 @@ function ChatComposerComponent({
                   <Button
                     size="icon-sm"
                     variant="ghost"
-                    className="rounded-lg text-primary-500 hover:bg-primary-100 dark:hover:bg-primary-800 hover:text-primary-500"
+                    className="rounded-lg text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.08] transition-colors cursor-pointer"
                     aria-label="Add attachment"
                     disabled={disabled}
                     onClick={handleOpenAttachmentPicker}
                   >
                     <HugeiconsIcon
                       icon={AttachmentIcon}
-                      size={20}
+                      size={18}
                       strokeWidth={1.5}
                     />
                   </Button>
@@ -2765,13 +2765,13 @@ function ChatComposerComponent({
                     <Button
                       size="icon-sm"
                       variant="ghost"
-                      className="rounded-lg text-primary-400 hover:bg-primary-100 dark:hover:bg-primary-800 hover:text-red-600"
+                      className="rounded-lg text-zinc-500 hover:text-red-400 hover:bg-white/[0.08] transition-colors cursor-pointer"
                       aria-label="Clear draft"
                       onClick={handleClearDraft}
                     >
                       <HugeiconsIcon
                         icon={Cancel01Icon}
-                        size={20}
+                        size={18}
                         strokeWidth={1.5}
                       />
                     </Button>
@@ -2779,7 +2779,7 @@ function ChatComposerComponent({
                 )}
                 {/* Token counter — bottom bar, mirrors Hermes style, triggers at ~25 tokens */}
                 {value.length >= 100 && (
-                  <span className="ml-1 text-[10px] text-primary-400 tabular-nums select-none">
+                  <span className="ml-1 text-[10px] font-mono text-zinc-500 tabular-nums select-none">
                     ~{Math.ceil(value.length / 4)} tokens
                   </span>
                 )}
@@ -2797,7 +2797,7 @@ function ChatComposerComponent({
                         setIsThinkingMenuOpen(false)
                         setIsModelMenuOpen(false)
                       }}
-                      className="inline-flex h-8 items-center gap-1.5 rounded-full bg-primary-100/70 px-2 text-xs font-medium text-primary-600 transition-colors hover:bg-primary-200/80 dark:hover:bg-primary-800/60"
+                      className="inline-flex h-7 items-center gap-1.5 rounded-lg border border-white/[0.08] bg-white/[0.03] px-2.5 text-xs font-mono text-zinc-300 transition-colors hover:border-white/[0.18] hover:bg-white/[0.08] hover:text-white cursor-pointer"
                       title={`Chat controls · ${modelButtonLabel}`}
                       aria-label={`Chat controls, current model: ${modelButtonLabel}`}
                     >
@@ -3145,13 +3145,18 @@ function ChatComposerComponent({
                         onClick={handleSubmit}
                         disabled={submitDisabled}
                         size="icon-sm"
-                        className="rounded-full"
+                        className={cn(
+                          'rounded-xl size-8 transition-all duration-150 cursor-pointer',
+                          submitDisabled
+                            ? 'bg-white/[0.05] text-zinc-500 border border-white/[0.06]'
+                            : 'bg-zinc-100 hover:bg-white text-zinc-950 shadow-sm active:scale-95',
+                        )}
                         aria-label="Send message"
                       >
                         <HugeiconsIcon
                           icon={ArrowUp02Icon}
-                          size={20}
-                          strokeWidth={1.5}
+                          size={18}
+                          strokeWidth={2}
                         />
                       </Button>
                     </PromptInputAction>

@@ -1,115 +1,171 @@
 import { HugeiconsIcon } from '@hugeicons/react'
 import {
-  CodeIcon,
+  CommandLineIcon,
   CpuIcon,
-  Folder01Icon,
-  Search01Icon,
+  GitBranchIcon,
+  Layers01Icon,
 } from '@hugeicons/core-free-icons'
 import { useEffect, useState } from 'react'
 
 type ProfileSummary = {
   name: string
   model?: string
-  active?: boolean
 }
 
-type QuickPrompt = {
-  label: string
+type CommandChip = {
+  id: string
+  tag: string
+  title: string
+  desc: string
   prompt: string
-  icon: unknown
 }
 
-const QUICK_PROMPTS: Array<QuickPrompt> = [
+const COMMAND_CHIPS: Array<CommandChip> = [
   {
-    label: 'Cek status git & uncommitted files',
-    prompt: 'Tolong cek status git di workspace, list perubahan file yang ada sekarang.',
-    icon: Folder01Icon,
+    id: 'git',
+    tag: 'GIT',
+    title: 'Git status & diff',
+    desc: 'Audit modified files & branch state',
+    prompt: 'Cek git status di workspace workstation, apa saja file yang diubah dan uncommitted changes saat ini.',
   },
   {
-    label: 'Audit port & service aktif di workstation',
-    prompt: 'Cek port lokal dan service apa saja yang sedang aktif berjalan di workstation.',
-    icon: Search01Icon,
+    id: 'ports',
+    tag: 'PORT',
+    title: 'System & port audit',
+    desc: 'Check active local processes & ports',
+    prompt: 'Audit port lokal dan proses background yang sedang running di workstation ini.',
   },
   {
-    label: 'Jalankan build check hermes-dashboard',
-    prompt: 'Nazza, tolong jalankan build check di hermes-dashboard dan pastikan 0 error.',
-    icon: CodeIcon,
+    id: 'build',
+    tag: 'BUILD',
+    title: 'Build & health check',
+    desc: 'Verify compile status & run tests',
+    prompt: 'Jalankan build check untuk memverifikasi apakah ada error atau compile warning di project aktif.',
   },
   {
-    label: 'Ringkas context memory & skills aktif',
-    prompt: 'Tolong ringkas fakta memory dan list skill yang terpasang di profile nazza.',
-    icon: CpuIcon,
+    id: 'memory',
+    tag: 'VAULT',
+    title: 'Inspect memory vault',
+    desc: 'Review persistent user facts & rules',
+    prompt: 'Tampilkan ringkasan memori persisten aktif untuk profile nazza dan workspace.',
   },
 ]
 
 type ChatEmptyStateProps = {
-  onSuggestionClick?: (prompt: string) => void
   compact?: boolean
+  onSuggestionClick?: (prompt: string) => void
 }
 
 export function ChatEmptyState({
-  onSuggestionClick,
   compact = false,
+  onSuggestionClick,
 }: ChatEmptyStateProps) {
   const [activeProfile, setActiveProfile] = useState<ProfileSummary | null>(null)
 
   useEffect(() => {
-    fetch('/api/profiles/list')
-      .then((res) => res.json())
-      .then((data) => {
-        const profiles = data?.profiles as Array<ProfileSummary> | undefined
-        const active = profiles?.find((p) => p.active)
-        if (active) setActiveProfile(active)
-      })
-      .catch(() => {})
+    let unmounted = false
+    async function loadActiveProfile() {
+      try {
+        const res = await fetch('/api/profiles')
+        if (!res.ok) return
+        const data = await res.json()
+        if (unmounted) return
+        const active =
+          data?.profiles?.find((p: any) => p.is_active || p.name === 'nazza') ||
+          data?.profiles?.[0]
+        if (active) {
+          setActiveProfile({
+            name: active.name || 'nazza',
+            model: active.model || active.model_name || 'ag/gemini-3.8-flash-high',
+          })
+        }
+      } catch {
+        if (!unmounted) {
+          setActiveProfile({
+            name: 'nazza',
+            model: 'ag/gemini-3.8-flash-high',
+          })
+        }
+      }
+    }
+    loadActiveProfile()
+    return () => {
+      unmounted = true
+    }
   }, [])
 
   return (
-    <div className="flex h-full flex-col items-center justify-center px-6 py-12 select-none">
-      <div className="w-full max-w-xl flex flex-col items-center text-center">
-        {/* Minimal Monospace Header */}
-        <div className="flex items-center gap-2 mb-4 font-mono text-[11px] tracking-wider uppercase text-zinc-500">
-          <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
-          <span>Naxx Workstation</span>
-          <span>/</span>
-          <span className="text-zinc-400 font-semibold">{activeProfile?.name || 'Nazza Core'}</span>
-          {activeProfile?.model && (
-            <>
-              <span>/</span>
-              <span className="text-zinc-500 lowercase">{activeProfile.model}</span>
-            </>
-          )}
+    <div className="flex h-full flex-col items-center justify-center px-4 py-8 select-none">
+      <div className="flex max-w-xl w-full flex-col items-center text-center">
+        {/* Sleek Terminal Workstation Header Tag */}
+        <div className="inline-flex items-center gap-2 rounded-md border border-white/[0.08] bg-[#121217] px-3 py-1 text-[11px] font-mono tracking-wider text-zinc-400">
+          <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="text-zinc-200 font-semibold">NAXX WORKSTATION</span>
+          <span className="text-zinc-600">//</span>
+          <span className="text-amber-400 font-medium">HERMES AGENT</span>
         </div>
 
-        {/* Confident, Clean Headline */}
-        <h1 className="text-2xl sm:text-3xl font-medium tracking-tight text-zinc-100">
-          Ada yang bisa Nazza bantu eksekusi?
+        {/* Crisp Headline */}
+        <h1 className="mt-4 text-2xl sm:text-3xl font-semibold tracking-tight text-zinc-100">
+          Ready to execute.
         </h1>
-        <p className="mt-2 text-sm text-zinc-400 max-w-md">
-          Ketik instruksi di bawah untuk mulai eksekusi kode, terminal, inspeksi file, atau koordinasi strategi.
+
+        <p className="mt-1.5 text-xs sm:text-sm text-zinc-400 max-w-md font-sans">
+          Active profile <span className="font-mono text-zinc-200">{activeProfile?.name || 'nazza'}</span> with full tool access, terminal PTY, and live memory.
         </p>
 
-        {/* Tactical Quick Action Chips (Zero-slop, clean single-line pills) */}
+        {/* Model & Status Pill */}
+        <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-white/[0.06] bg-white/[0.02] px-3 py-0.5 text-[11px] text-zinc-400 font-mono">
+          <span className="text-zinc-500">model:</span>
+          <span className="text-zinc-200">{activeProfile?.model || 'ag/gemini-3.8-flash-high'}</span>
+        </div>
+
+        {/* Tactical Command Chips */}
         {!compact && (
-          <div className="mt-8 flex flex-wrap justify-center gap-2 max-w-lg">
-            {QUICK_PROMPTS.map((item) => (
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-2.5 w-full text-left">
+            {COMMAND_CHIPS.map((chip) => (
               <button
-                key={item.label}
+                key={chip.id}
                 type="button"
-                onClick={() => onSuggestionClick?.(item.prompt)}
-                className="inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-white/[0.08] bg-zinc-900/60 hover:bg-zinc-800/80 hover:border-zinc-600 text-xs text-zinc-300 hover:text-white transition-all duration-150 active:scale-[0.98] cursor-pointer"
+                onClick={() => onSuggestionClick?.(chip.prompt)}
+                className="group relative flex items-start gap-3 rounded-xl border border-white/[0.08] bg-[#111116] p-3 text-left transition-all duration-150 hover:border-white/[0.18] hover:bg-[#16161d] active:scale-[0.98] focus:outline-none focus:ring-1 focus:ring-amber-500/40 cursor-pointer"
               >
-                <HugeiconsIcon
-                  icon={item.icon as any}
-                  size={14}
-                  strokeWidth={1.5}
-                  className="text-zinc-400 shrink-0"
-                />
-                <span>{item.label}</span>
+                <div className="flex size-7 shrink-0 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.03] text-zinc-400 group-hover:text-amber-400 group-hover:border-amber-500/30 transition-colors">
+                  <span className="font-mono text-[10px] font-bold tracking-tight">
+                    {chip.tag}
+                  </span>
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="text-xs font-semibold text-zinc-200 group-hover:text-white transition-colors">
+                    {chip.title}
+                  </div>
+                  <div className="mt-0.5 text-[11px] text-zinc-500 group-hover:text-zinc-400 transition-colors truncate">
+                    {chip.desc}
+                  </div>
+                </div>
               </button>
             ))}
           </div>
         )}
+
+        {/* Clean Shortcut Footer */}
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-3 text-[11px] font-mono text-zinc-500">
+          <span className="flex items-center gap-1.5">
+            <kbd className="rounded border border-white/[0.08] bg-white/[0.04] px-1.5 py-0.5 text-[10px] text-zinc-400">Ctrl</kbd>
+            <kbd className="rounded border border-white/[0.08] bg-white/[0.04] px-1.5 py-0.5 text-[10px] text-zinc-400">K</kbd>
+            <span>palette</span>
+          </span>
+          <span>•</span>
+          <span className="flex items-center gap-1.5">
+            <kbd className="rounded border border-white/[0.08] bg-white/[0.04] px-1.5 py-0.5 text-[10px] text-zinc-400">↵</kbd>
+            <span>send</span>
+          </span>
+          <span>•</span>
+          <span className="flex items-center gap-1.5">
+            <kbd className="rounded border border-white/[0.08] bg-white/[0.04] px-1.5 py-0.5 text-[10px] text-zinc-400">⇧↵</kbd>
+            <span>newline</span>
+          </span>
+        </div>
       </div>
     </div>
   )

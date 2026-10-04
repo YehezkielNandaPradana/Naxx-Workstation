@@ -12,6 +12,7 @@ import {
   McpServerIcon,
   MessageMultiple01Icon,
   Moon02Icon,
+  PlusSignIcon,
   PuzzleIcon,
   Rocket01Icon,
   Search01Icon,
@@ -1096,25 +1097,25 @@ function ChatSidebarComponent({
                 to="/chat"
                 className={cn(
                   buttonVariants({ variant: 'ghost', size: 'sm' }),
-                  'w-full pl-1.5 justify-start gap-2.5 rounded-xl hover:bg-white/[0.05] transition-all bouncy-btn',
+                  'w-full pl-1.5 justify-start gap-2.5 rounded-xl hover:bg-white/[0.05] transition-all',
                 )}
               >
-                <div className="relative size-7 rounded-xl bg-gradient-to-tr from-amber-500/20 to-purple-500/20 p-0.5 border border-white/10 flex items-center justify-center shrink-0">
+                <div className="relative size-7 rounded-lg bg-[#181822] p-0.5 border border-white/[0.12] flex items-center justify-center shrink-0">
                   <img
                     src="/claude-avatar.webp"
                     alt="Hermes Agent"
-                    className="size-full rounded-[9px] object-cover"
+                    className="size-full rounded-[6px] object-cover"
                   />
-                  <span className="absolute -bottom-0.5 -right-0.5 size-2 rounded-full bg-amber-500 breathing-dot" />
+                  <span className="absolute -bottom-0.5 -right-0.5 size-2 rounded-full bg-emerald-500 ring-2 ring-[#0c0c10]" />
                 </div>
                 <div className="flex flex-col min-w-0 text-left">
                   <span
-                    className="text-xs font-bold tracking-tight text-white truncate"
+                    className="text-xs font-semibold tracking-wider font-mono text-zinc-100 truncate uppercase"
                   >
-                    Hermes Dashboard
-                  </span>
-                  <span className="text-[10px] font-medium text-amber-400/90 tracking-wide uppercase">
                     Naxx Workstation
+                  </span>
+                  <span className="text-[10px] font-mono text-zinc-400 tracking-wide">
+                    hermes · nazza
                   </span>
                 </div>
               </Link>
@@ -1157,6 +1158,30 @@ function ChatSidebarComponent({
           </TooltipRoot>
         </TooltipProvider>
       </motion.div>
+
+      {/* ── New Session button ────────────────────────────────────────── */}
+      <div className="px-2 pt-1 pb-1">
+        <Link
+          to="/chat/$sessionKey"
+          params={{ sessionKey: 'new' }}
+          onClick={onSelectSession}
+          className={cn(
+            'flex items-center gap-2 rounded-lg border border-white/[0.08] bg-white/[0.03] text-xs font-medium text-zinc-200 transition-all hover:border-white/[0.18] hover:bg-white/[0.08] hover:text-white cursor-pointer select-none',
+            isVisuallyCollapsed ? 'size-9 justify-center mx-auto' : 'w-full px-2.5 py-2 justify-between',
+          )}
+          title="New Session"
+        >
+          <div className="flex items-center gap-2">
+            <HugeiconsIcon icon={PlusSignIcon} size={15} strokeWidth={2} className="text-emerald-400" />
+            {!isVisuallyCollapsed && <span>New Session</span>}
+          </div>
+          {!isVisuallyCollapsed && (
+            <kbd className="text-[10px] font-mono text-zinc-500 bg-white/[0.04] border border-white/[0.06] px-1 py-0.5 rounded">
+              new
+            </kbd>
+          )}
+        </Link>
+      </div>
 
       {/* ── Search (ChatGPT-style, above sections) ─────────────────── */}
       <div className="px-2 pb-1">

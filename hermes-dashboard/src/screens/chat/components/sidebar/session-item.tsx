@@ -138,31 +138,38 @@ function SessionItemComponent({
       }}
       className={cn(
         'group inline-flex items-center justify-between',
-        'w-full text-left px-3 py-2.5 my-0.5 rounded-xl transition-all duration-200 bouncy-btn',
-        'select-none',
+        'w-full text-left px-2.5 py-2 my-0.5 rounded-lg transition-all duration-150',
+        'select-none cursor-pointer',
         active
-          ? 'bg-[#181822] text-white border border-amber-500/25 shadow-sm'
-          : 'bg-transparent text-zinc-300 hover:bg-white/[0.04] hover:text-white',
+          ? 'bg-[#181822] text-white border border-white/[0.12] shadow-xs'
+          : 'bg-transparent text-zinc-400 hover:bg-white/[0.04] hover:text-zinc-200 border border-transparent',
       )}
     >
-      <div className="flex-1 min-w-0 py-1.5">
-        <div
+      <div className="flex items-center gap-2 flex-1 min-w-0">
+        <span
           className={cn(
-            'truncate text-sm font-[500]',
-            isGenerating ? 'text-primary-700' : '',
+            'size-1.5 rounded-full shrink-0',
+            active ? 'bg-emerald-400' : 'bg-zinc-600 group-hover:bg-zinc-400',
           )}
-        >
-          <span className={cn(isGenerating ? 'animate-pulse' : undefined)}>
+        />
+        <div className="flex-1 min-w-0">
+          <div
+            className={cn(
+              'truncate text-xs font-medium',
+              active ? 'text-zinc-100' : 'text-zinc-300 group-hover:text-zinc-100',
+              isGenerating ? 'text-amber-400 animate-pulse' : '',
+            )}
+          >
             {baseTitle}
-          </span>
-        </div>
-        <div
-          className={cn(
-            'mt-0.5 text-[11px] text-primary-600 truncate',
-            isError ? 'text-red-600' : undefined,
-          )}
-        >
-          {subtitle}
+          </div>
+          <div
+            className={cn(
+              'mt-0.5 text-[10px] font-mono text-zinc-500 truncate',
+              isError ? 'text-red-400' : undefined,
+            )}
+          >
+            {subtitle}
+          </div>
         </div>
       </div>
       <MenuRoot>
@@ -173,9 +180,9 @@ function SessionItemComponent({
             event.stopPropagation()
           }}
           className={cn(
-            'ml-2 inline-flex size-7 items-center justify-center rounded-md text-primary-700',
-            'opacity-0 transition-opacity group-hover:opacity-100 hover:bg-primary-200 dark:hover:bg-primary-800',
-            'aria-expanded:opacity-100 aria-expanded:bg-primary-200',
+            'ml-1.5 inline-flex size-6 items-center justify-center rounded-md text-zinc-500',
+            'opacity-0 transition-opacity group-hover:opacity-100 hover:text-zinc-200 hover:bg-white/[0.08]',
+            'aria-expanded:opacity-100 aria-expanded:bg-white/[0.08]',
           )}
           aria-label="Session options"
         >

@@ -74,10 +74,10 @@ function SectionCard({
   children: React.ReactNode
 }) {
   return (
-    <section className="rounded-2xl border border-primary-200 bg-primary-50/70 p-4 shadow-sm">
+    <section className="rounded-xl border border-white/[0.08] bg-[#111116] p-4">
       <div className="mb-3">
-        <h2 className="text-sm font-semibold text-primary-900">{title}</h2>
-        <p className="mt-0.5 text-xs text-primary-500">{subtitle}</p>
+        <h2 className="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-200">{title}</h2>
+        <p className="mt-0.5 text-xs text-zinc-400">{subtitle}</p>
       </div>
       {children}
     </section>
@@ -86,7 +86,7 @@ function SectionCard({
 
 function EmptyRow({ children }: { children: React.ReactNode }) {
   return (
-    <div className="rounded-xl border border-dashed border-primary-200 px-3 py-5 text-center text-xs text-primary-500">
+    <div className="rounded-lg border border-dashed border-white/[0.1] px-3 py-5 text-center text-xs font-mono text-zinc-500">
       {children}
     </div>
   )

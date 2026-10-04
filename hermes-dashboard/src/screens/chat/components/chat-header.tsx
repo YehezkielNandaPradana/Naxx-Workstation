@@ -1,6 +1,11 @@
 import { memo, useCallback, useEffect, useRef, useState } from 'react'
 import { HugeiconsIcon } from '@hugeicons/react'
-import { Folder01Icon } from '@hugeicons/core-free-icons'
+import {
+  ArrowTurnBackwardIcon,
+  Delete01Icon,
+  Folder01Icon,
+  Pen01Icon,
+} from '@hugeicons/core-free-icons'
 import { Button } from '@/components/ui/button'
 import {
   TooltipContent,
@@ -365,14 +370,14 @@ function ChatHeaderComponent({
               className="relative flex items-center gap-2"
               ref={sessionPopoverRef}
             >
-              <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-amber-500/25 bg-amber-500/10 text-[11px] font-semibold text-amber-400 shrink-0 select-none">
-                <span className="size-2 rounded-full bg-amber-400 breathing-dot" />
-                <span>NAXX CORE</span>
+              <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-md border border-white/[0.08] bg-[#14141b] text-[10px] font-mono text-zinc-300 shrink-0 select-none">
+                <span className="size-1.5 rounded-full bg-emerald-400" />
+                <span className="font-semibold tracking-wider uppercase">NAXX</span>
               </div>
               <button
                 type="button"
                 onClick={() => setSessionPopoverOpen((p) => !p)}
-                className="min-w-0 truncate text-sm font-semibold text-zinc-100 hover:text-amber-400 transition-colors rounded-sm text-left"
+                className="min-w-0 truncate text-xs font-medium text-zinc-200 hover:text-white transition-colors rounded-sm text-left"
                 title="Click to switch session"
               >
                 {activeTitle}
@@ -381,10 +386,10 @@ function ChatHeaderComponent({
                 <button
                   type="button"
                   onClick={startTitleEdit}
-                  className="text-xs text-primary-400 opacity-0 group-hover:opacity-100 hover:text-primary-600 transition-opacity shrink-0"
+                  className="text-xs text-zinc-500 opacity-0 group-hover:opacity-100 hover:text-zinc-200 transition-opacity shrink-0 cursor-pointer"
                   title="Rename session"
                 >
-                  ✏️
+                  <HugeiconsIcon icon={Pen01Icon} size={12} strokeWidth={1.75} />
                 </button>
               )}
               {sessionPopoverOpen && (
@@ -501,17 +506,17 @@ function ChatHeaderComponent({
               <TooltipTrigger
                 render={
                   <span
-                    className="mr-2 inline-flex items-center gap-1 rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-medium text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
+                    className="mr-2 inline-flex items-center gap-1.5 rounded-md border border-amber-500/20 bg-amber-500/10 px-2 py-0.5 text-[10px] font-mono text-amber-400"
                     aria-label="Thinking: Adaptive"
                     role="status"
-                    style={{ boxShadow: '0 0 6px 1px rgba(251,191,36,0.4)' }}
                   >
-                    🧠
+                    <span className="size-1 rounded-full bg-amber-400 animate-pulse" />
+                    <span>THINKING</span>
                   </span>
                 }
               />
               <TooltipContent side="bottom">
-                Thinking: Adaptive — Hermes reasons before responding
+                Adaptive reasoning active
               </TooltipContent>
             </TooltipRoot>
           </TooltipProvider>
@@ -558,10 +563,10 @@ function ChatHeaderComponent({
                   <Button
                     size="icon-sm"
                     variant="ghost"
-                    className="text-primary-500 hover:bg-primary-100 dark:hover:bg-primary-800"
+                    className="text-zinc-400 hover:text-white hover:bg-white/[0.08]"
                     aria-label="Undo last message"
                   >
-                    <span className="text-sm">↩️</span>
+                    <HugeiconsIcon icon={ArrowTurnBackwardIcon} size={15} strokeWidth={1.75} />
                   </Button>
                 }
               />
@@ -587,16 +592,19 @@ function ChatHeaderComponent({
                     size="icon-sm"
                     variant="ghost"
                     className={cn(
-                      'hover:bg-primary-100 dark:hover:bg-primary-800',
-                      clearConfirm ? 'text-red-500' : 'text-primary-500',
+                      'hover:bg-white/[0.08] transition-colors',
+                      clearConfirm ? 'text-red-400' : 'text-zinc-400 hover:text-white',
                     )}
                     aria-label={
                       clearConfirm ? 'Confirm clear' : 'Clear session'
                     }
                   >
-                    <span className="text-sm">
-                      {clearConfirm ? '⚠️' : '🗑️'}
-                    </span>
+                    <HugeiconsIcon
+                      icon={Delete01Icon}
+                      size={15}
+                      strokeWidth={1.75}
+                      className={clearConfirm ? 'text-red-400 animate-pulse' : 'text-zinc-400'}
+                    />
                   </Button>
                 }
               />

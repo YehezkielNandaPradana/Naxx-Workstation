@@ -1,11 +1,22 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { AgentCommandCenter } from '@/screens/chat/agent-command-center'
+import { createFileRoute, redirect } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/chat/')({
   ssr: false,
-  component: ChatCommandCenterRoute,
+  beforeLoad: () => {
+    let target = 'main'
+    try {
+      if (typeof window !== 'undefined') {
+        const stored = localStorage.getItem('claude-last-session')
+        if (stored && stored.trim() && stored !== 'undefined') {
+          target = stored.trim()
+        }
+      }
+    } catch {}
+    throw redirect({
+      to: '/chat/$sessionKey',
+      params: { sessionKey: target },
+      replace: true,
+    })
+  },
+  component: () => null,
 })
-
-function ChatCommandCenterRoute() {
-  return <AgentCommandCenter />
-}
