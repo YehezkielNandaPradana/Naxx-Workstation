@@ -876,7 +876,7 @@ function ChatSidebarComponent({
 
   const asideProps = {
     className: cn(
-      'border-r h-full overflow-hidden flex flex-col bg-[#0c0c11]/90 backdrop-blur-2xl border-white/[0.07] theme-text',
+      'border-r h-full overflow-hidden flex flex-col bg-[#0d0d10] border-white/[0.08] theme-text',
       isMobile && 'fixed inset-y-0 left-0 z-50 shadow-2xl',
       isMobile && isCollapsed && 'pointer-events-none',
     ),

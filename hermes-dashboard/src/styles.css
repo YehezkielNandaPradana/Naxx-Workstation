@@ -386,50 +386,42 @@ code {
   --spring-snappy: cubic-bezier(0.2, 0.9, 0.25, 1);
 }
 
-/* Pinterest Ambient Mesh Background */
+/* Clean Studio Workstation Background — Crisp, solid, zero slop */
 .workstation-mesh-bg {
   background-color: var(--theme-bg, #09090b);
-  background-image: 
-    radial-gradient(at 0% 0%, rgba(245, 158, 11, 0.035) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.04) 0px, transparent 50%),
-    radial-gradient(at 50% 100%, rgba(16, 185, 129, 0.03) 0px, transparent 50%);
-  background-attachment: fixed;
 }
 
-/* Ultra-smooth micro-interactions */
+/* Tactile micro-interactions (fast, snappy, responsive) */
 .smooth-spring {
-  transition: all 0.25s var(--spring-bounce);
+  transition: all 0.15s cubic-bezier(0.2, 0.9, 0.25, 1);
 }
 
 .bouncy-hover {
-  transition: transform 0.22s var(--spring-bounce), box-shadow 0.22s ease, border-color 0.22s ease;
+  transition: border-color 0.15s ease, background-color 0.15s ease, transform 0.15s ease;
 }
 .bouncy-hover:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 .bouncy-hover:active {
-  transform: scale(0.97);
+  transform: scale(0.98);
 }
 
 .bouncy-btn {
-  transition: transform 0.18s var(--spring-bounce), background-color 0.18s ease, border-color 0.18s ease;
+  transition: background-color 0.12s ease, border-color 0.12s ease, transform 0.12s ease;
 }
 .bouncy-btn:active {
-  transform: scale(0.96);
+  transform: scale(0.98);
 }
 
-/* Floating Glassmorphism Cards */
+/* Sharp Instrument-grade Cards */
 .floating-glass-card {
-  background: rgba(18, 18, 24, 0.75) !important;
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.07) !important;
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5) !important;
+  background: #111116 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
 }
 
 .floating-glass-card:hover {
-  border-color: rgba(245, 158, 11, 0.25) !important;
-  box-shadow: 0 14px 40px -10px rgba(245, 158, 11, 0.08), 0 0 20px rgba(245, 158, 11, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
 }
 
 /* Breathing Agent Status Indicator */

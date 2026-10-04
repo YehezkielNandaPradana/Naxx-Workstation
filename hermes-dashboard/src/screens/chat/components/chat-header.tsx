@@ -306,8 +306,8 @@ function ChatHeaderComponent({
   }
 
   return (
-    <div ref={wrapperRef} className="shrink-0 bg-[#09090b]/80 backdrop-blur-2xl border-b border-white/[0.07]">
-      <div className="px-5 h-14 flex items-center">
+    <div ref={wrapperRef} className="shrink-0 bg-[#09090b] border-b border-white/[0.08]">
+      <div className="px-5 h-12 flex items-center">
         {showFileExplorerButton ? (
           <TooltipProvider>
             <TooltipRoot>
